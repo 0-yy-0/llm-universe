@@ -1,28 +1,44 @@
-# 第六章：增强阶段（重构版）
+# 第六章：增强阶段
 
-本目录采用“三层增强 + 选型总结”的结构讲解第六章，避免与前几章重复：
+## 基础 RAG 的三个隐含假设
 
-1. `0. 先导：为什么基础 RAG 还不够.ipynb`
-2. `1. 上下文增强（重构版）.ipynb`
-3. `2. 流程增强（重构版）.ipynb`
-4. `3. 系统增强.ipynb`
-5. `4. 选型总结.md`
+基础 RAG 通常隐含三个假设：一次检索就能覆盖答案所需的全部证据；被召回的片段本身已包含充分上下文；当前问题不依赖历史对话、跨文档关系或系统状态。
 
-## 本章新增方法（2026）
+当这三个假设不成立时，就需要引入增强策略。
 
-- 上下文增强：`Sentence Window`、`Small-to-Big`、`AutoMerging`、`Late Chunking（理论）`
-- 流程增强：`迭代检索`、`递归检索`、`查询路由与自适应检索`、`Corrective RAG`、`Self-RAG`
-- 系统增强：`Memory`、`Multi-Document Agent`、`Agentic RAG`、`GraphRAG`
+## 当假设不成立时
 
-## 与前几章的边界
+- 假设 1 失效（命中但上下文不全）→ **上下文增强**：在检索后恢复邻域、父块或层级上下文。
+- 假设 2 失效（一次检索不够）→ **流程增强**：让系统多走几步——迭代、递归、路由、质量把关、自反思。
+- 假设 3 失效（跨轮/跨文档/状态丢失）→ **系统增强**：引入记忆、多文档路由、知识图谱和 Agent 编排。
 
-- 第3章（索引）已讲：混合检索、元数据、CCH、文档增强
-- 第4章（检索）已讲：query 改写、HyDE、step-back、子查询
-- 第5章（生成）已讲：压缩、重排、过滤、引用
+## 方法地图
 
-本章重点是：**定位失败类型 -> 选择增强层级 -> 组合方法落地**。
+```mermaid
+flowchart TD
+    basic[基础 RAG] --> ctx[上下文增强]
+    basic --> flow[流程增强]
+    basic --> sys[系统增强]
 
-## 旧版内容说明
+    ctx --> sw[Sentence Window]
+    ctx --> stb[Small-to-Big]
+    ctx --> am[AutoMerging]
 
-- `0. 其他增强（llama-index 版 rag fusion，混合检索，重写查询）.ipynb` 保留为历史草稿，作为补充参考，不再作为主线内容。
-- `1. 上下文增强.ipynb` 与 `2. 流程增强.ipynb` 保留原始版本，便于对照。
+    flow --> ir[迭代检索]
+    flow --> rr[递归检索]
+    flow --> qr[查询路由与自适应检索]
+    flow --> crag[Corrective RAG]
+    flow --> selfrag[Self-RAG]
+
+    sys --> mem[Memory]
+    sys --> mda[Multi-Document Agent]
+    sys --> graphrag[GraphRAG]
+    sys --> agentic[Agentic RAG]
+```
+
+## 本章内容
+
+1. `1. 上下文增强.ipynb` — 解决"检索相关但上下文不全"
+2. `2. 流程增强.ipynb` — 解决"一轮流程不够"
+3. `3. 系统增强.ipynb` — 解决"多轮/多文档/状态丢失"
+4. `4. 选型总结.md` — 方法组合与成本权衡
