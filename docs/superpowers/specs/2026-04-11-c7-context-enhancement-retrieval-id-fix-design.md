@@ -36,7 +36,7 @@
 - **检索后**：`hit_ids = [int(d.metadata["sentence_id"]) for d in hits]`，并对缺失或非数字 metadata 做**显式告警或跳过**（可选 `print` 一行，避免静默）。
 - **窗口拼接**：保持 `window_ids = sorted({... neighbor_map ...})` 与现有 `sentence_map[i]` 拼接逻辑。
 - **inspect**：与 `sentence_window_answer` 使用同一套 `hit_ids` 解析规则。
-- **持久化目录**：例如 `sentence_window_v2` → `sentence_window_v3`（具体名在实现时与 notebook 内常量一致），并在 markdown 提示：改过目录需删旧目录或接受重建。
+- **持久化目录**：与 notebook 内常量一致，固定为 `sentence_window` / `small_to_big` 等**单一目录名**；改参数时删该目录重建即可，不保留多版历史路径。
 
 ## 5. Small-to-Big 与 AutoMerging 改动（共用子块向量库）
 
@@ -45,7 +45,7 @@
 - **检索后**：`hit_ids = {int(d.metadata["child_id"]) for d in hits}`（或列表去重），**禁止**再用全文集合反查作为主路径；可删除或仅保留 debug 分支。
 - **`small_to_big_answer`**：`parent_ids` 仍由 `child_to_parent[i]` 推导；父块拼接上限等参数保持现有教学设定，除非另有 spec。
 - **`auto_merge_answer`**：逻辑不变；可选增强（同轮实现或后续）：对 `merged_parents` 按「该父块下最小 `child_id`」或 `parent_idx` 排序，使上下文顺序更接近文档流；在代码注释或小节 markdown 中说明 `sparse_parts[:4]` / `parts[:8]` 为 token 启发式上限。
-- **持久化目录**：例如 `small_to_big_ragdoc` → `small_to_big_ragdoc_v2`（与上同理）。
+- **持久化目录**：固定 `small_to_big`（与上同理）。
 - **inspect_small_to_big / inspect_auto_merging**：用 metadata 解析 `child_id`，与 answer 路径一致。
 
 ## 6. 共用工具函数（建议）
