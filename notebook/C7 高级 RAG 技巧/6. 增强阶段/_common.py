@@ -181,6 +181,107 @@ def load_qna_subset(qa_path: str, indices: Iterable[int]) -> dict[str, str]:
     return out
 
 
-# ---------- 评估与运行器（占位，Task 2/3 中实现） ----------
-# simple_eval_2pt / answer_from_context_fn / run_shared_eval / build_compare_table → Task 2
-# run_session_eval → Task 3
+# ---------- 评估接口（6.1 节首次出现，notebook 中 inline 完整重写一次） ----------
+
+DEFAULT_EVAL_PROMPT_2PT = (
+    "请作为一名判卷人，按 0～2 分评判「模型答案」回答「用户问题」的质量，并对照「参考答案」核对事实与要点。\n"
+    "你只收到下列三段文字，没有 RAG 检索原文；请勿以「未逐字引用原文」为由扣分，除非答案与参考答案明显矛盾。\n"
+    "评分标准：\n"
+    "2 分：核心结论正确，问题所问的必答要点基本齐全，无明显事实错误；表述可比参考答案更短。\n"
+    "1 分：方向基本正确，但明显缺少部分关键点，或解释不完整、表述含糊；无严重编造。\n"
+    "0 分：关键结论错误、严重漏答问题核心、或与参考答案明显矛盾、或凭空补充。\n"
+    "参考答案中的引导语、举例、排版说明不必复述；勿因未覆盖参考答案中的次要枝节就将 2 分打成 1 分。\n\n"
+    "用户问题：{question}\n"
+    "参考答案：{expected_answer}\n"
+    "模型答案：{llm_answer}\n\n"
+    "请仅输出一行，且该行只包含一个字符：0、1 或 2，不要输出任何其它文字。"
+)
+
+
+def _parse_eval_score(raw: str) -> int:
+    text = (raw or "").strip()
+    for line in text.splitlines():
+        s = line.strip()
+        s = re.sub(r"^[-*•\d.)]+\s*", "", s)
+        if re.fullmatch(r"[012]", s):
+            return int(s)
+    m = re.search(r"(?<![0-9])([012])(?![0-9])", text)
+    if m:
+        return int(m.group(1))
+    return 0
+
+
+def simple_eval_2pt(
+    llm_answer: str,
+    expected_answer: str,
+    question: str = "",
+    *,
+    prompt_template: str | None = None,
+) -> int:
+    """0~2 分 LLM 裁判。三节都用同一接口；prompt_template 允许各节传入定制模板。
+    模板必须包含 {question} / {expected_answer} / {llm_answer} 三个占位符。
+    """
+    template = prompt_template or DEFAULT_EVAL_PROMPT_2PT
+    prompt = template.format(
+        question=question,
+        expected_answer=expected_answer,
+        llm_answer=llm_answer,
+    )
+    try:
+        return _parse_eval_score(llm_call(prompt))
+    except Exception as e:
+        print(f"评估失败: {e}")
+        return 0
+
+
+def answer_from_context_fn(build_context_fn: Callable[[str], str]) -> Callable[[str], str]:
+    """6.1 专用胶水：把 *_context(q)->str 的钩子接到 LLM 上。
+    6.2 / 6.3 不需要这个胶水（pipeline / system.ask 已经直接产出答案）。
+    """
+    def _answer(question: str) -> str:
+        context = build_context_fn(question)
+        prompt = build_rag_generation_prompt(question, context)
+        return llm_call(prompt)
+    return _answer
+
+
+def run_shared_eval(
+    answer_fn: Callable[[str], str],
+    qna_dict: dict[str, str],
+    *,
+    eval_prompt_template: str | None = None,
+) -> pd.DataFrame:
+    """通用评测流水线：逐题调 answer_fn，再用 simple_eval_2pt 打分，返回 DataFrame。
+    6.1 / 6.2 都用本函数；6.3 用 run_session_eval。
+    eval_prompt_template 用于 6.2 维度计分等需要定制 prompt 的场景。
+    """
+    rows = []
+    for question, expected in qna_dict.items():
+        answer = answer_fn(question)
+        score = simple_eval_2pt(
+            answer, expected, question,
+            prompt_template=eval_prompt_template,
+        )
+        rows.append({
+            "question": question,
+            "llm_answer": answer,
+            "expected_answer": expected,
+            "rag_eval_results": score,
+        })
+    return pd.DataFrame(rows)
+
+
+def build_compare_table(dfs: list[pd.DataFrame], names: list[str]) -> pd.DataFrame:
+    """把多个 run_shared_eval 的结果按 question 列对齐拼接为同题对比表。"""
+    if len(dfs) != len(names):
+        raise ValueError("dfs 与 names 长度必须一致")
+    base = dfs[0][["question"]].copy()
+    base[names[0]] = dfs[0]["rag_eval_results"].values
+    out = base
+    for df, name in zip(dfs[1:], names[1:]):
+        out = out.merge(
+            df[["question", "rag_eval_results"]].rename(columns={"rag_eval_results": name}),
+            on="question",
+            how="outer",
+        )
+    return out.reset_index(drop=True)
