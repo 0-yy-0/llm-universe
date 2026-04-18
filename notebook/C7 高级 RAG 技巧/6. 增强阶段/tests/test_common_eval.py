@@ -74,3 +74,23 @@ def test_build_compare_table_aligns_on_question():
     assert list(out.columns) == ["question", "A", "B"]
     assert out.loc[out["question"] == "q1", "A"].iloc[0] == 2
     assert out.loc[out["question"] == "q2", "B"].iloc[0] == 2
+
+
+def test_run_session_eval_preserves_state(monkeypatch):
+    import _common
+    monkeypatch.setattr(_common, "llm_call", lambda prompt, **kw: "2")
+
+    class FakeSystem:
+        def __init__(self):
+            self.calls: list[str] = []
+
+        def ask(self, q: str) -> str:
+            self.calls.append(q)
+            return f"answer-of-{q}-after-{len(self.calls)}-calls"
+
+    sys_obj = FakeSystem()
+    qna = {"q1": "a1", "q2": "a2", "q3": "a3"}
+    df = _common.run_session_eval(sys_obj, qna)
+    assert list(df["question"]) == ["q1", "q2", "q3"]
+    assert sys_obj.calls == ["q1", "q2", "q3"]
+    assert "after-3-calls" in df["llm_answer"].iloc[2]

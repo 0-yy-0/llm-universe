@@ -285,3 +285,30 @@ def build_compare_table(dfs: list[pd.DataFrame], names: list[str]) -> pd.DataFra
             how="outer",
         )
     return out.reset_index(drop=True)
+
+
+# ---------- 系统评测（6.3 节首次出现，notebook 中 inline 完整重写一次） ----------
+
+def run_session_eval(
+    system,
+    qna_dict: dict[str, str],
+    *,
+    eval_prompt_template: str | None = None,
+) -> pd.DataFrame:
+    """6.3 系统增强专用：按 dict 顺序调用 system.ask(q)，复用同一 system 实例
+    以保留 memory / history / 路由状态。返回与 run_shared_eval 同结构的 DataFrame。
+    """
+    rows = []
+    for question, expected in qna_dict.items():
+        answer = system.ask(question)
+        score = simple_eval_2pt(
+            answer, expected, question,
+            prompt_template=eval_prompt_template,
+        )
+        rows.append({
+            "question": question,
+            "llm_answer": answer,
+            "expected_answer": expected,
+            "rag_eval_results": score,
+        })
+    return pd.DataFrame(rows)
