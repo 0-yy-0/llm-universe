@@ -1,10 +1,9 @@
 """
 6. 增强阶段 三节共用的公共底座（single source of truth）。
 
-各 notebook 中"首次出现"的核心新概念（评估、钩子胶水）必须先在 notebook 内
-完整 inline 重写一次，再 from _common import 复用；本文件保存与 notebook
-首次定义字符相同的副本。基础工具（embedding、PDF、Chroma 等）前几章已讲，
-notebook 中不重复展示，直接 import。
+6.1 的评估接口（0～2 裁判 / run_shared_eval / build_compare_table / answer_from_context_fn 等）以本文件
+为 single source of truth；`1. 上下文增强.ipynb` 仅 `import`，不再与 notebook 各贴一份。基础工具（embedding、
+PDF、Chroma 等）前几章已讲，各 notebook 直接 `import`。
 """
 from __future__ import annotations
 
@@ -37,7 +36,7 @@ PDF_PATH = "../3. 索引阶段/data/pumpkin_book.pdf"
 QA_PATH = "../3. 索引阶段/data/train_dataset.json"
 
 CHROMA_COLLECTION = "nb_ctx"
-CONTEXT_CHAR_BUDGET = int(os.environ.get("CONTEXT_CHAR_BUDGET", "1150"))
+CONTEXT_CHAR_BUDGET = int(os.environ.get("CONTEXT_CHAR_BUDGET", "2500"))
 
 LLM_MODEL = "glm-4-flash-250414"
 LLM_MAX_RETRIES = 10
@@ -125,7 +124,7 @@ def llm_call(prompt: str, *, sleep_after: float = 0.0) -> str:
 
     global _zhipu_ai_client
     if _zhipu_ai_client is None:
-        _zhipu_ai_client = ZhipuAI(api_key=os.environ.get("ZHIPUAI_API_KEY"))
+        _zhipu_ai_client = ZhipuAI(api_key=os.environ.get("ZHIPUAI_API_KEY"), max_retries=1)
     client = _zhipu_ai_client
     for attempt in range(LLM_MAX_RETRIES):
         try:
@@ -133,6 +132,7 @@ def llm_call(prompt: str, *, sleep_after: float = 0.0) -> str:
                 model=LLM_MODEL,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.0,
+                timeout=10,
             )
             if sleep_after > 0:
                 time.sleep(sleep_after)
@@ -181,7 +181,7 @@ def load_qna_subset(qa_path: str, indices: Iterable[int]) -> dict[str, str]:
     return out
 
 
-# ---------- 评估接口（6.1 节首次出现，notebook 中 inline 完整重写一次） ----------
+# ---------- 评估接口（6.1 从本模块 import，不在 notebook 重复粘贴） ----------
 
 DEFAULT_EVAL_PROMPT_2PT = (
     "请作为一名判卷人，按 0～2 分评判「模型答案」回答「用户问题」的质量，并对照「参考答案」核对事实与要点。\n"
@@ -285,6 +285,82 @@ def build_compare_table(dfs: list[pd.DataFrame], names: list[str]) -> pd.DataFra
             how="outer",
         )
     return out.reset_index(drop=True)
+
+
+def compare_method_with_baseline(
+    method_df: pd.DataFrame,
+    baseline_df: pd.DataFrame,
+    method_name: str,
+    *,
+    show_answers: bool = True,
+    print_summary: bool = True,
+    top_n: int | None = 5,
+) -> pd.DataFrame:
+    """单方法 vs Baseline 的差异展示 + 整体统计。
+
+    返回的 DataFrame 只保留 **有差异（提分 / 回退）** 的行，按 ``|delta|`` 降序排列，
+    便于一眼看出方法相较 Baseline 改动幅度最大的题；``index`` 沿用全量对比表的原行号，
+    与下方 summary 中打印的「严格提分 / 回退 / 持平 行号」一一对应。
+
+    列：
+      - question / baseline / <method_name> / delta / status(提分|回退)
+      - show_answers=True 时附加 expected_answer / baseline_answer / <method>_answer
+
+    参数：
+      - top_n: 仅展示前 N 行差异（按 |delta| 降序），默认 5。None 表示不截断。
+      - print_summary=True 时打印整体统计：n、均值、Δ、严格提分/回退/持平题数与行号；
+        统计始终基于全量题集，与是否截断展示无关。
+    """
+    base_cols = ["question", "rag_eval_results", "expected_answer", "llm_answer"]
+    base = baseline_df[base_cols].rename(
+        columns={"rag_eval_results": "baseline", "llm_answer": "baseline_answer"}
+    )
+    meth = method_df[["question", "rag_eval_results", "llm_answer"]].rename(
+        columns={"rag_eval_results": method_name, "llm_answer": f"{method_name}_answer"}
+    )
+    full = base.merge(meth, on="question", how="outer").reset_index(drop=True)
+    full["delta"] = full[method_name] - full["baseline"]
+    full["status"] = full["delta"].apply(
+        lambda d: "提分" if d > 0 else ("回退" if d < 0 else "持平")
+    )
+
+    if print_summary:
+        n = len(full)
+        max_pts = 2 * n
+        b_mean = float(full["baseline"].mean())
+        m_mean = float(full[method_name].mean())
+        wins = full.index[full[method_name] > full["baseline"]].tolist()
+        loss = full.index[full[method_name] < full["baseline"]].tolist()
+        ties = full.index[full[method_name] == full["baseline"]].tolist()
+        print(f"--- {method_name} vs Baseline 整体（n={n}，满分 {max_pts}）---")
+        print(f"  Baseline      : {b_mean:.3f}（总分 {int(full['baseline'].sum())}/{max_pts}）")
+        print(f"  {method_name:<14}: {m_mean:.3f}（总分 {int(full[method_name].sum())}/{max_pts}），Δ={m_mean - b_mean:+.3f}")
+        print(f"  严格提分: {len(wins)} 题  行号={wins}")
+        print(f"  回退    : {len(loss)} 题  行号={loss}")
+        print(f"  持平    : {len(ties)} 题  行号={ties}")
+
+    diff = full[full["status"] != "持平"].copy()
+    diff = diff.assign(_abs=diff["delta"].abs()).sort_values(
+        by=["_abs", "delta"], ascending=[False, False], kind="mergesort"
+    ).drop(columns="_abs")
+
+    truncated = False
+    if top_n is not None and len(diff) > top_n:
+        diff = diff.head(top_n)
+        truncated = True
+
+    cols = ["question", "baseline", method_name, "delta", "status"]
+    if show_answers:
+        cols += ["expected_answer", "baseline_answer", f"{method_name}_answer"]
+    diff = diff[cols]
+
+    if print_summary:
+        diff_total = int((full["status"] != "持平").sum())
+        if truncated:
+            print(f"  差异共 {diff_total} 题，按 |delta| 降序仅展示前 {top_n} 题")
+        else:
+            print(f"  差异共 {diff_total} 题，已全部展示（按 |delta| 降序）")
+    return diff
 
 
 # ---------- 系统评测（6.3 节首次出现，notebook 中 inline 完整重写一次） ----------

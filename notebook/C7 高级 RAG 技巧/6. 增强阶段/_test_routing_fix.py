@@ -31,7 +31,7 @@ def build_retriever(chunk_size=256, chunk_overlap=20, k=4):
 
 # Build retrievers
 math_retriever = build_retriever(chunk_size=128, chunk_overlap=20, k=8)
-general_retriever_k2 = build_retriever(chunk_size=512, chunk_overlap=60, k=2)
+general_retriever_k2 = build_retriever(chunk_size=512, chunk_overlap=60, k=4)
 general_retriever_k4 = build_retriever(chunk_size=512, chunk_overlap=60, k=4)
 
 ROUTER_PROMPT = """

@@ -23,6 +23,7 @@ flowchart TD
     ctx --> sw[Sentence Window]
     ctx --> stb[Small-to-Big]
     ctx --> am[AutoMerging]
+    ctx --> lc[Late Chunking（理论）]
 
     flow --> ir[迭代检索]
     flow --> rr[递归检索]
