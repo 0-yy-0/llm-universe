@@ -30,7 +30,17 @@ if str(COURSE) not in sys.path:
     sys.path.insert(0, str(COURSE))
 
 from common.dataset import load_dataset  # noqa: E402
-from common.eval_utils import recall_at_k  # noqa: E402
+from common.eval_utils import make_recursive_chunks, recall_at_k  # noqa: E402
+
+
+def test_recursive_chunks_preserve_adjacent_chinese_sentences():
+    chunks = make_recursive_chunks(
+        [{"page": 1, "text": "第一句。第二句。第三句。"}],
+        chunk_size=7,
+        overlap=0,
+    )
+
+    assert [chunk["text"] for chunk in chunks] == ["第一句。", "第二句。", "第三句。"]
 
 
 def test_explicit_query_batch_and_methods_are_shared():

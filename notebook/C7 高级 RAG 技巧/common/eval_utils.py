@@ -361,7 +361,9 @@ def make_recursive_chunks(
     for page in pages:
         sentences = [
             part.strip()
-            for part in re.split(r"(?<=[。！？.!?])\s+", _page_text(page))
+            for part in re.split(
+                r"(?<=[。！？])\s*|(?<=[.!?])\s+", _page_text(page)
+            )
             if part.strip()
         ]
         parts = []
