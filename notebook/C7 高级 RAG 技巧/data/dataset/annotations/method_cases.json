@@ -89,7 +89,7 @@
     "check": "rule_learning_interpretability",
     "check_purpose": "确认没有改坏"
   },
-  "检查相关性后重新检索（CRAG）": {
+  "受 CRAG 启发的本地纠错（人工补查词演示）": {
     "notebook": "6. 处理信息缺口/检查检索结果后再继续.ipynb",
     "main": "model_selection_no_absolute_best",
     "check": "bellman_value_function",

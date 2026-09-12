@@ -11,7 +11,7 @@
 5. [选择向量模型](选择向量模型.ipynb)
 6. [什么时候需要微调向量模型](什么时候需要微调向量模型.ipynb)
 
-微调 Notebook 同时保留不同监督结构与损失函数的技术选型：query-positive 对应 MNRL 或 MegaBatchMarginLoss，0/1 句对对应 ContrastiveLoss，连续分数句对对应 CosineSimilarityLoss，句对类别对应 SoftmaxLoss，显式正负三元组对应 TripletLoss，带类别标签的单句对应 BatchAll、BatchHard、BatchHardSoftMargin 和 BatchSemiHard TripletLoss。它们都可以学习，但不能在同一份数据上不加区分地互换；本章只对与当前 query→evidence 数据匹配的 MNRL 做真实训练。
+微调 Notebook 按五种监督结构说明损失选择：query-positive、带二值/连续分数的句对、带类别的句对、显式正负三元组，以及带类别标签的单句。对应方法包括 MNRL、MegaBatchMarginLoss、ContrastiveLoss、CosineSimilarityLoss、SoftmaxLoss、TripletLoss 和四种 Batch Triplet 损失；本章对当前 query→evidence 数据采用 MNRL 做真实训练，其他方法保留原理与适用条件。
 
 ## 什么时候才需要微调
 
@@ -30,9 +30,9 @@
 
 split 按 page、`section_id` 和 `query_family_id` 隔离，不共享 qrel evidence。候选 answer 仅用于审核，训练 positive 始终是 canonical `evidence.quote`；训练、开发和测试采用同一任务定义，但来源页面不同。
 
-### fresh clone 的一次性 BGE 缓存准备
+## 运行实验
 
-在 fresh clone 的 `py310/llm-universe-c7` 环境中，第一次运行前、网络可用时显式下载固定模型一次：
+先按[教程首页的运行准备](../README.md#运行准备)使用 Python 3.10 与 `llm-universe-c7` kernel，进入 C7 根目录并安装 `requirements-c7.txt`。第一次运行前，在同一环境、网络可用时下载固定模型一次：
 
 ```bash
 python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('BAAI/bge-small-zh-v1.5')"
@@ -48,7 +48,7 @@ python -c "from sentence_transformers import SentenceTransformer; SentenceTransf
 python scripts/run_embedding_finetune.py
 ```
 
-Notebook 和脚本都只读取 canonical package；依赖、模型或数据缺失会直接报错，不使用 fallback。运行环境为本目录的 `requirements-c7.txt` 和 Python 3.10 kernel。
+上面的脚本也从 C7 根目录运行。Notebook 和脚本都只读取统一数据包，缺少依赖、缓存模型或数据时直接报错；章节目录下没有另一份 `requirements-c7.txt`。
 
 ### 目录中的示意图
 

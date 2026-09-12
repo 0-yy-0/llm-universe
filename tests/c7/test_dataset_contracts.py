@@ -531,6 +531,65 @@ def test_checker_rejects_normalized_query_conflict(tmp_path):
     assert any("规范化 query 冲突" in issue for issue in issues)
 
 
+@pytest.mark.parametrize(
+    ("left", "right"),
+    [
+        ("α > 0 时会怎样？", "α < 0 时会怎样？"),
+        ("α > 0 时会怎样？", "α = 0 时会怎样？"),
+        ("α ≥ 0 时会怎样？", "α > 0 时会怎样？"),
+        ("α != 0 时会怎样？", "α = 0 时会怎样？"),
+        ("α - 1 是多少？", "α + 1 是多少？"),
+        ("α * 2 是多少？", "α / 2 是多少？"),
+        ("α = 0.5 时会怎样？", "α = 05 时会怎样？"),
+        ("α_i 是什么？", "αi 是什么？"),
+    ],
+)
+def test_normalized_queries_preserve_mathematical_conditions(left, right):
+    assert dataset_store.normalize_query(left) != dataset_store.normalize_query(right)
+
+
+def test_normalized_queries_still_merge_surface_variants_of_the_same_condition():
+    assert dataset_store.normalize_query("α ＞ ０ 时会怎样？") == dataset_store.normalize_query("α>0时会怎样")
+    assert dataset_store.normalize_query("KKT 条件是什么？") == dataset_store.normalize_query("什么是KKT条件")
+
+
+def test_background_saved_trace_only_references_current_canonical_evidence():
+    path = COURSE / "1. 背景" / "为什么基础 RAG 还会答错.ipynb"
+    notebook = json.loads(path.read_text(encoding="utf-8"))
+    outputs = [output for cell in notebook["cells"] for output in cell.get("outputs", [])]
+    audits = [
+        output.get("data", {}).get("application/vnd.llm-universe.tutorial-audit+json", {})
+        for output in outputs
+    ]
+    trace = next(audit for audit in audits if audit.get("trace_kind") == "c1_failure_diagnosis")
+    current_ids = {row["evidence_id"] for row in dataset_store.load_search_evidence()}
+    assert set(trace["target_evidence_ids"]) <= current_ids
+    assert all(set(ids) <= current_ids for ids in trace["retrieved_evidence_ids"])
+    expected = {
+        row["evidence_id"] for row in dataset_store.load_qrel_records()
+        if row["query_id"] == trace["query_id"] and row["relevance"] == 1
+    }
+    assert set(trace["target_evidence_ids"]) == expected
+
+
+def test_eval_inventory_saved_output_matches_teaching_and_finetune_partitions(monkeypatch, capsys):
+    path = COURSE / "7. 评估" / "建设评估问题集.ipynb"
+    notebook = json.loads(path.read_text(encoding="utf-8"))
+    cell = notebook["cells"][1]
+    monkeypatch.chdir(COURSE)
+    namespace = {}
+    exec(compile("".join(cell["source"]), str(path), "exec"), namespace)
+    actual_output = capsys.readouterr().out
+    saved_output = "".join(
+        "".join(output["text"]) for output in cell["outputs"]
+        if output["output_type"] == "stream" and output["name"] == "stdout"
+    )
+    assert len(namespace["teaching_ids"]) == 70
+    assert len(namespace["finetune_ids"]) == 163
+    assert len(namespace["remaining_teaching_ids"]) == 4
+    assert actual_output == saved_output
+
+
 @pytest.mark.parametrize("mutation", ["legacy_status", "failed_status", "false"])
 def test_checker_rejects_review_status_or_semantic_tampering(tmp_path, mutation):
     target = _copy_dataset(tmp_path)

@@ -27,3 +27,12 @@
     - 第六章 LLM 应用精选案例
         - [案例一：个人知识库助手](C6/案例1：个人知识库助手.md)
         - [案例二：人情世故大模型](C6/案例2：人情世故大模型系统-天机.md)
+    - 第七章 高级 RAG 技巧
+        - [课程首页与运行准备](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/README.md)
+        - [1. 背景](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/1.%20背景/README.md)
+        - [2. 数据处理](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/2.%20数据处理/README.md)
+        - [3. 索引阶段](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/3.%20索引阶段/README.md)
+        - [4. 检索阶段](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/4.%20检索阶段/README.md)
+        - [5. 生成阶段](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/5.%20生成阶段/README.md)
+        - [6. 处理信息缺口](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/6.%20处理信息缺口/README.md)
+        - [7. 评估](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/7.%20评估/README.md)

@@ -135,18 +135,24 @@ class DatasetContractError(ValueError):
 def normalize_query(value: object) -> str:
     """Normalize query wording for duplicate/conflict detection.
 
-    Whitespace and punctuation are intentionally removed after NFKC
-    normalization.  This catches superficial variants such as
+    Whitespace and prose punctuation are removed after NFKC normalization.
+    Symbols and punctuation used inside formulas are retained: removing
+    a relation/operator in ``α > 0``, ``α = 0`` or ``α - 1`` changes meaning.
+    This catches superficial variants such as
     "KKT 条件是什么？" and "什么是KKT条件" without changing the stored
     question text used by the model.
     """
 
     text = unicodedata.normalize("NFKC", str(value or "")).casefold()
+    formula_punctuation = frozenset("-*/\\%!&|_.,:()[]{}")
     text = "".join(
         character
         for character in text
         if not character.isspace()
-        and not unicodedata.category(character).startswith(("P", "S"))
+        and (
+            not unicodedata.category(character).startswith("P")
+            or character in formula_punctuation
+        )
     )
     # Canonicalize the common Chinese definition inversion so
     # “KKT条件是什么” and “什么是KKT条件” conflict as one query.

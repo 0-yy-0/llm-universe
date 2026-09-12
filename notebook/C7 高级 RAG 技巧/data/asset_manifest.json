@@ -69,21 +69,21 @@
           "source_id": "canonical_dataset_manifest",
           "source_type": "canonical dataset manifest",
           "purpose": "dataset schema, split counts and evaluation boundary",
-          "sha256": "0c227ab607258cdfbcc3aa647c3e5410f6efcec108897729317939e5eea992c6"
+      "sha256": "d1fce45406e9de33ac9b68a20a909dfa862408afab82a43b47c76db3798d128c"
         },
         {
           "path": "2. 数据处理/README.md",
           "source_id": "data_processing_readme",
           "source_type": "C7 data-processing guide",
           "purpose": "training data construction, MNRL choice and frozen-test protocol",
-          "sha256": "c68570b70a63bc1a5b8dc8e172d8d3149f217c428b9b4c692f29d29438fc2f3f"
+      "sha256": "31445abb451090a868ad0487fdd4bba820b7ba6cde624f6b31bd644d2e730c1d"
         },
         {
           "path": "7. 评估/README.md",
           "source_id": "evaluation_readme",
           "source_type": "C7 evaluation guide",
           "purpose": "method-fit, regression guard and end-to-end evaluation scope",
-          "sha256": "4fdec106be63b0de0468b3d513599f4caaa394d4d75158a80776cec766fb422c"
+      "sha256": "d8bb7231a75d18162173cfb57061af0bda7edbb08ce65c538e5c3e4747c3eac0"
         }
       ]
     },

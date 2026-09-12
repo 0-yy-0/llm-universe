@@ -20,7 +20,7 @@
 2. LLM 开发技巧。LLM 开发更进阶的技巧，包括但不限于：Prompt Engineering、多类型源数据的处理、优化检索、召回精排、Agent 框架等
 3. LLM 应用实例。引入一些成功的开源案例，从本课程的角度出发，解析这些应用范例的 Idea、核心思路、实现框架，帮助初学者明白其可以通过 LLM 开发什么样的应用。
 
-目前，第一部分已经完稿，欢迎大家阅读学习；第二、三部分正在创作中。
+第一部分已完稿；第二部分的 C7 高级 RAG 技巧已提供七步学习路径、可运行 Notebook 与评估案例，可以从[课程入口](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/README.md)开始。第三部分持续补充应用解读。
 
 **目录结构说明：**
 
@@ -103,7 +103,7 @@ LLM 正逐步成为信息世界的新革命力量，其通过强大的自然语�
 
 ### 第二部分 进阶 RAG 技巧
 
-完整课程入口：[C7 高级 RAG 技巧](../notebook/C7%20高级%20RAG%20技巧/README.md)。
+完整课程入口：[C7 高级 RAG 技巧](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/README.md)。C7 的 Notebook 源文件位于仓库 `notebook/` 目录，以下入口在 GitHub 打开；本地运行环境与依赖以 C7 首页为准。
 
 负责人：高立业
 

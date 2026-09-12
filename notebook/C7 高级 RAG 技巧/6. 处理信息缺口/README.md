@@ -2,13 +2,7 @@
 
 这一章处理“已经找到一些资料，但还不够回答”的情况。先判断缺少的是相邻文字、另一处资料、上一轮对话，还是另一个资料范围，再选对应办法。
 
-## 本章的评估边界
-
-本章采用**方法专题审计**：每个 Notebook 都用自己明确的目标问题、候选语料、检索预算和检查指标，回答“这个机制在什么条件下补回了什么、是否引入副作用”。不同专题的候选语料、问题和预算不相同，不能把它们合并成一张跨方法成绩表或统一排行榜。需要同题、同语料、同预算的索引字段比较时，请先看 [C3 可选横向实验](../3.%20索引阶段/比较索引增强方法.ipynb)；需要检查某种改动是否伤害一般问题时，再看 [C7 评估中的回归护栏](../7.%20评估/README.md)。
-
-专题审计保留改善、持平、退化和“不适用”等结果；一次专题案例成立，不等于方法对其他问题或整个资料库都有效。
-
-## 选择树
+## 按缺口选择方法
 
 - 命中句缺少上下文 → [按句子和父子片段补充上下文](按句子和父子片段补充上下文.ipynb) 或 [找到相关页面后补上相邻内容](找到相关页面后补上相邻内容.ipynb)。
 - 第一次只找到一部分 → [一次没找全时如何补查](一次没找全时如何补查.ipynb)、拆题或检查结果后再继续。
@@ -25,7 +19,7 @@
 2. [找到相关页面后补上相邻内容](找到相关页面后补上相邻内容.ipynb)：已经定位连续推导中的一页时补上前后页。
 3. [长文先整体编码再分块](长文先整体编码再分块.ipynb)：先让向量模型看到较长上下文，再为短片段生成向量。
 
-这些方法关注一个已定位来源内部的相邻范围，不自动把不同来源拼成一份事实。状态继承只在指代明确且只有一个候选实体时发生；新主题、过期状态或多个候选实体都应停止继承并澄清。
+这些方法关注已经定位的来源内部，适合补回命中片段周围的定义、条件或推导。跨文件资料需要后面的来源路由与证据合并。
 
 ## 第一次没有找全
 
@@ -41,11 +35,9 @@ Agentic RAG Notebook 的 plan、verify、repair 响应必须分别满足精确�
 
 Agentic RAG 的每个固定案例只保存一个最终 `answer`：`status=answered` 时 `claims` 必须非空，`status=insufficient` 时必须为 `claims=[]`。每条 claim 必须是 `{statement, evidence_ids, evidence}`：`evidence_ids` 为非空且不重复的候选 ID，`evidence` 逐项保存对应的 `evidence_id/page/quote`，并与最终 `candidate_catalog` 和 canonical 原文完全一致；固定 answerable 案例的 claims 合并引用还必须覆盖全部 essential qrels。repair 后必须先完成 final verify，才能生成最终答案。教程检查器只读取这些已保存结构，不执行 Notebook 或网络/API 调用。
 
-CRAG 的 `BAAI/bge-reranker-base` 只接受明确的本地 snapshot，运行时显式 `local_files_only=True`；缺少本地文件会立即 `FileNotFoundError`。依赖与资源准备分开：从 C7 根目录执行唯一依赖文件安装，并仅在运行前联网准备一次本地 snapshot：
+CRAG 的 `BAAI/bge-reranker-base` 只接受明确的本地 snapshot，运行时使用 `local_files_only=True`，缺少文件会报 `FileNotFoundError`。先按[教程首页](../README.md#运行准备)进入 C7 根目录并安装 `requirements-c7.txt`，再在同一目录、联网时准备一次本地 snapshot：
 
 ```bash
-cd "notebook/C7 高级 RAG 技巧"
-python -m pip install -r requirements-c7.txt
 python -c "from modelscope import snapshot_download; print(snapshot_download('BAAI/bge-reranker-base'))"
 ```
 
@@ -59,12 +51,16 @@ python -c "from modelscope import snapshot_download; print(snapshot_download('BA
 
 GraphRAG 作为关系型检索扩展放在[让系统选择资料来源](让系统选择资料来源.ipynb)末尾：保留实体关系抽取、消歧、受限子图遍历、关系路径映回原文和评估方法。当前数据没有 canonical 实体关系标注，因此不把手写关系或不可追溯的模型输出包装成实测提升。
 
-Notebook 的 `conversation state` 只保留本会话最近三轮的原问题、独立查询、来源、回答和 `focus_entity`。明确出现新实体时以当前实体为准；新会话不继承旧历史；只有歧义追问暂停检索和调用并请求澄清，换主题从新的资料范围开始。
+Notebook 的 `conversation state` 只保留本会话最近三轮的原问题、独立查询、来源、回答和 `focus_entity`。新会话的完整首问正常路由、检索和回答，缺少历史的歧义追问才澄清；出现明确新实体时使用当前实体。示例中的“换个话题”会清空历史并返回 `new_topic`，待用户给出新的资料范围后继续。
 
 该实验需要真实生成：只从项目根目录 `.env` 读取 `ZHIPUAI_API_KEY`，固定调用 `glm-4-flash`，并以 `max_retries=0` 建立客户端。Notebook 保存原始模型输出、来源选择、检索证据、`evidence_id`→`quote` 绑定、回答和历史写回；无法解析或无法绑定引用时直接失败。
 
 自动闸门只检查结构化字段、来源范围、证据 ID 绑定、连续原文 quote，以及数字和少量关键结论词的局部形式支持；它不声称完成全文语义核验、权限过滤、版本治理或生产评测。
 
 一次性改写问题和拆题见[改写检索问题](../4.%20检索阶段/改写检索问题.ipynb)；根据问题难度决定是否检索、最多查几次，见[判断是否需要继续检索](../4.%20检索阶段/判断是否需要继续检索.ipynb)。
+
+## 怎样判断实验结果
+
+每个 Notebook 固定自己的问题、候选语料、检索预算和检查指标，记录补回了什么、增加多少检索，以及改善、持平、退化或不适用的结果。不同专题的范围不同，局部成功不能直接外推到整个资料库。需要同题索引比较时看 [C3 可选实验](../3.%20索引阶段/比较索引增强方法.ipynb)，需要复查一般问题时看[评估](../7.%20评估/README.md)。
 
 [返回教程首页](../README.md)

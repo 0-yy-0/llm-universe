@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 import re
 import warnings
+from bisect import bisect_right
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -355,52 +356,57 @@ def make_fixed_chunks(
 def make_recursive_chunks(
     pages: Sequence[dict], chunk_size: int = 260, overlap: int = 0
 ) -> list[dict]:
+    """优先在句尾收块，并在同页相邻片段间重复 ``overlap`` 个字符。
+
+    字符数以 ``normalize_text`` 后的页文本为准，片段是它的连续切片。
+    下一块从上一块末尾回退 overlap 个字符，所以重叠前缀可能从句中
+    开始。若长度上限内没有能继续前进的句尾，则按字符硬切；页间不重叠。
+    """
+
     if chunk_size <= 0 or overlap < 0 or overlap >= chunk_size:
         raise ValueError("chunk_size 必须为正，overlap 必须小于 chunk_size")
     chunks = []
     for page in pages:
-        sentences = [
-            part.strip()
-            for part in re.split(
-                r"(?<=[。！？])\s*|(?<=[.!?])\s+", _page_text(page)
-            )
-            if part.strip()
-        ]
-        parts = []
-        step = chunk_size - overlap
-        for sentence in sentences:
-            if len(sentence) <= chunk_size:
-                parts.append(sentence)
-                continue
-            parts.extend(
-                sentence[start : start + chunk_size]
-                for start in range(0, len(sentence), step)
-            )
+        text = normalize_text(_page_text(page))
+        sentence_ends = []
+        cursor = 0
+        for sentence in split_sentences(text):
+            cursor = text.index(sentence, cursor) + len(sentence)
+            sentence_ends.append(cursor)
 
-        current = ""
+        start = 0
         number = 0
-        for part in parts:
-            if current and len(current) + len(part) + 1 > chunk_size:
+        while start < len(text):
+            end = min(start + chunk_size, len(text))
+            if end < len(text):
+                boundary_index = bisect_right(sentence_ends, end) - 1
+                # 必须在重叠前缀之外加入新字符，避免短句或大 overlap 导致循环。
+                if boundary_index >= 0 and sentence_ends[boundary_index] > start + overlap:
+                    end = sentence_ends[boundary_index]
+            part = text[start:end]
+            if part.strip():
                 number += 1
                 chunks.append(
                     {
                         "chunk_id": f"p{_page_number(page)}_sentence_{number}",
                         "pages": [_page_number(page)],
-                        "text": normalize_text(current),
+                        "text": part,
                     }
                 )
-                current = ""
-            current = f"{current} {part}".strip()
-        if current:
-            number += 1
-            chunks.append(
-                {
-                    "chunk_id": f"p{_page_number(page)}_sentence_{number}",
-                    "pages": [_page_number(page)],
-                    "text": normalize_text(current),
-                }
-            )
+            if end == len(text):
+                break
+            start = end - overlap
     return chunks
+
+
+def split_sentences(text: object) -> list[str]:
+    """中文句末无需空格；英文句末需空格，避免拆开小数等内容。"""
+
+    return [
+        part.strip()
+        for part in re.split(r"(?<=[。！？])\s*|(?<=[.!?])\s+", str(text or ""))
+        if part.strip()
+    ]
 
 
 def build_bm25_chunk_search(
@@ -443,6 +449,7 @@ __all__ = [
     "load_query_controls",
     "make_fixed_chunks",
     "make_recursive_chunks",
+    "split_sentences",
     "precision_at_k",
     "recall_at_k",
     "average_precision",

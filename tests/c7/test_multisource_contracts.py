@@ -15,13 +15,39 @@ DIRECT_SOURCE_IDS = {
     "data_processing_readme",
     "evaluation_readme",
 }
+def _current_evidence_id(source_id, paragraph_prefix):
+    """Resolve the current line while preserving exact-source citation checks."""
+    source_paths = {
+        "data_processing_readme": "2. 数据处理/README.md",
+        "evaluation_readme": "7. 评估/README.md",
+    }
+    lines = (ROOT / source_paths[source_id]).read_text(encoding="utf-8").splitlines()
+    matches = [
+        f"{source_id}:L{number}"
+        for number, text in enumerate(lines, start=1)
+        if text.startswith(paragraph_prefix)
+    ]
+    assert len(matches) == 1, (source_id, paragraph_prefix, matches)
+    return matches[0]
+
+
+PROCESSING_RESULTS_ID = _current_evidence_id(
+    "data_processing_readme", "BGE 向量模型微调实验中，"
+)
+EVALUATION_RESULTS_ID = _current_evidence_id(
+    "evaluation_readme", "本次保存的真实 Notebook 输出显示："
+)
+EVALUATION_SCOPE_ID = _current_evidence_id(
+    "evaluation_readme", "BGE 微调实验是在 34 条 frozen test"
+)
+
 GENERATION_ORACLE_MARKERS = (
     "0.7941",
     "Recall@10",
     "Recall@5",
     "Recall@1",
-    "data_processing_readme:L61",
-    "evaluation_readme:L65",
+    PROCESSING_RESULTS_ID,
+    EVALUATION_RESULTS_ID,
     "expected_status",
     "expected_entity",
     "required_source_ids",
@@ -374,9 +400,9 @@ def test_saved_audit_covers_routing_citations_noncomparable_scopes_insufficiency
         for claim in rounds[2]["claims"]
     }
     assert claims >= {
-        ("data_processing_readme", "data_processing_readme:L61"),
-        ("evaluation_readme", "evaluation_readme:L65"),
-        ("evaluation_readme", "evaluation_readme:L67"),
+        ("data_processing_readme", PROCESSING_RESULTS_ID),
+        ("evaluation_readme", EVALUATION_RESULTS_ID),
+        ("evaluation_readme", EVALUATION_SCOPE_ID),
     }
     third_raw = _parse_raw(rounds[2]["raw"])
     third_text = json.dumps(rounds[2]["parsed"], ensure_ascii=False)
@@ -399,15 +425,15 @@ def test_saved_audit_covers_routing_citations_noncomparable_scopes_insufficiency
     }
     assert (
         "data_processing_readme",
-        "data_processing_readme:L61",
+        PROCESSING_RESULTS_ID,
     ) in third_claim_ids
     assert (
         "evaluation_readme",
-        "evaluation_readme:L65",
+        EVALUATION_RESULTS_ID,
     ) in third_claim_ids
     assert (
         "evaluation_readme",
-        "evaluation_readme:L67",
+        EVALUATION_SCOPE_ID,
     ) in third_claim_ids
     assert {
         claim["source_id"] for claim in rounds[2]["parsed"]["claims"]
@@ -422,14 +448,14 @@ def test_saved_audit_covers_routing_citations_noncomparable_scopes_insufficiency
     processing_claim = next(
         claim
         for claim in rounds[2]["parsed"]["claims"]
-        if claim["evidence_id"] == "data_processing_readme:L61"
+        if claim["evidence_id"] == PROCESSING_RESULTS_ID
     )
     assert "Recall@3 保持 0.7941" in processing_claim["quote"]
     assert "Recall@10" in processing_claim["quote"]
     evaluation_claim = next(
         claim
         for claim in rounds[2]["parsed"]["claims"]
-        if claim["evidence_id"] == "evaluation_readme:L65"
+        if claim["evidence_id"] == EVALUATION_RESULTS_ID
     )
     assert "不能表述成全面提升" in evaluation_claim["quote"]
 
