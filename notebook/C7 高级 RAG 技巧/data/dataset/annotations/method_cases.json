@@ -1,0 +1,200 @@
+{
+  "按问题难度限制检索轮次": {
+    "notebook": "4. 检索阶段/判断是否需要继续检索.ipynb",
+    "main": "lda_multihop",
+    "check": "accuracy_vs_error_rate",
+    "check_purpose": "确认没有改坏"
+  },
+  "关键词检索": {
+    "notebook": "3. 索引阶段/结合关键词和向量检索.ipynb",
+    "main": "slater_strong_duality",
+    "check": "svm_margin_generalization",
+    "check_purpose": "说明不适用或限制"
+  },
+  "删去上下文中的无关文字": {
+    "notebook": "5. 生成阶段/排序、压缩与回答.ipynb",
+    "main": "newton_hessian_cost",
+    "check": "logistic_regression_threshold",
+    "check_purpose": "再次改善"
+  },
+  "重新排序候选资料": {
+    "notebook": "5. 生成阶段/排序、压缩与回答.ipynb",
+    "main": "svm_soft_margin_alpha_bounds",
+    "check": "f1_harmonic_mean",
+    "check_purpose": "确认没有改坏"
+  },
+  "给片段补充检索说法": {
+    "notebook": "3. 索引阶段/给片段补充检索说法.ipynb",
+    "main": "ensemble_learning_definition",
+    "check": "sample_space_feature_engineering",
+    "check_purpose": "确认没有改坏"
+  },
+  "给片段补充章节标题（CCH）": {
+    "notebook": "3. 索引阶段/给片段补充章节标题.ipynb",
+    "main": "model_selection_with_intro_scope",
+    "check": "random_forest_feature_sampling",
+    "check_purpose": "确认没有改坏"
+  },
+  "给片段补充模型生成的背景（Contextual Retrieval）": {
+    "notebook": "3. 索引阶段/给片段补充所属上下文.ipynb",
+    "main": "contextual_cv_three_methods",
+    "check": "contextual_model_eval_scope",
+    "check_purpose": "说明不适用或限制"
+  },
+  "回答标注来源": {
+    "notebook": "5. 生成阶段/排序、压缩与回答.ipynb",
+    "main": "cross_validation_reliability",
+    "check": "gaussian_mean_estimate",
+    "check_purpose": "再次改善"
+  },
+  "资料不足时拒答": {
+    "notebook": "5. 生成阶段/排序、压缩与回答.ipynb",
+    "main": "book_evidence_boundary",
+    "check": "book_evidence_mnist",
+    "check_purpose": "再次改善"
+  },
+  "结合关键词和向量检索": {
+    "notebook": "3. 索引阶段/结合关键词和向量检索.ipynb",
+    "main": "model_evaluation_and_macro_micro",
+    "check": "svm_kernel_evidence",
+    "check_purpose": "说明不适用或限制"
+  },
+  "从问题中提取筛选条件": {
+    "notebook": "4. 检索阶段/从问题中提取筛选条件.ipynb",
+    "main": "lda_generalized_eigenvalue",
+    "check": "model_evaluation_purpose",
+    "check_purpose": "确认没有改坏"
+  },
+  "补回相邻句（Sentence Window）": {
+    "notebook": "6. 处理信息缺口/按句子和父子片段补充上下文.ipynb",
+    "main": "overfitting_underfitting",
+    "check": "business_model_selection",
+    "check_purpose": "确认没有改坏"
+  },
+  "逐层拆分复杂问题（Recursive Decomposition）": {
+    "notebook": "6. 处理信息缺口/按固定步骤拆分复杂问题.ipynb",
+    "main": "lda_derivation_recursive_steps",
+    "check": "linear_regression_global_optimum",
+    "check_purpose": "确认没有改坏"
+  },
+  "HyDE": {
+    "notebook": "4. 检索阶段/先写一个可能的答案再检索.ipynb",
+    "main": "hyde_gini_impurity",
+    "check": "hyde_cv_reliability",
+    "check_purpose": "说明不适用或限制"
+  },
+  "按关键词选择资料来源（Query Routing）": {
+    "notebook": "6. 处理信息缺口/让系统选择资料来源.ipynb",
+    "main": "bellman_with_reinforcement_scope",
+    "check": "rule_learning_interpretability",
+    "check_purpose": "确认没有改坏"
+  },
+  "检查相关性后重新检索（CRAG）": {
+    "notebook": "6. 处理信息缺口/检查检索结果后再继续.ipynb",
+    "main": "model_selection_no_absolute_best",
+    "check": "bellman_value_function",
+    "check_purpose": "确认没有改坏"
+  },
+  "生成后检查缺口并补查（Self-RAG）": {
+    "notebook": "6. 处理信息缺口/检查检索结果后再继续.ipynb",
+    "main": "self_rag_cost_threshold",
+    "check": "self_rag_generalization",
+    "check_purpose": "确认没有改坏"
+  },
+  "让模型选择检索方式（Agentic Retrieval）": {
+    "notebook": "6. 处理信息缺口/让系统决定怎样检索.ipynb",
+    "main": "agentic_mds_ksvd",
+    "check": "agentic_kpca_centering",
+    "check_purpose": "确认没有改坏"
+  },
+  "先看上下文再生成片段向量（Late Chunking）": {
+    "notebook": "6. 处理信息缺口/长文先整体编码再分块.ipynb",
+    "main": "late_chunking_model_evaluation_methods",
+    "check": "agentic_random_forest",
+    "check_purpose": "确认没有改坏"
+  },
+  "按回答缺口补查": {
+    "notebook": "6. 处理信息缺口/一次没找全时如何补查.ipynb",
+    "main": "newton_methods_comparison",
+    "check": "roc_threshold_process",
+    "check_purpose": "再次改善"
+  },
+  "按首轮概念补查": {
+    "notebook": "6. 处理信息缺口/一次没找全时如何补查.ipynb",
+    "main": "gmm_em_cluster_assignment",
+    "check": "decision_tree_stop_conditions",
+    "check_purpose": "说明不适用或限制"
+  },
+  "补全追问信息": {
+    "notebook": "6. 处理信息缺口/补全追问信息.ipynb",
+    "main": "model_evaluation_followup",
+    "check": "macro_micro_imbalance",
+    "check_purpose": "再次改善"
+  },
+  "按页分块": {
+    "notebook": "2. 数据处理/分块优化.ipynb",
+    "main": "descent_direction",
+    "check": "pca_projection_objective",
+    "check_purpose": "说明不适用或限制"
+  },
+  "按句子边界分块": {
+    "notebook": "2. 数据处理/分块优化.ipynb",
+    "main": "continuous_attribute_split_points",
+    "check": "lasso_sparse_solution",
+    "check_purpose": "说明不适用或限制"
+  },
+  "直接改写问题": {
+    "notebook": "4. 检索阶段/改写检索问题.ipynb",
+    "main": "algorithm_and_model",
+    "check": "version_space_definition",
+    "check_purpose": "说明不适用或限制"
+  },
+  "先查一般原理": {
+    "notebook": "4. 检索阶段/改写检索问题.ipynb",
+    "main": "vc_dimension_generalization_bound",
+    "check": "lda_goal_and_eigenvector",
+    "check_purpose": "再次改善"
+  },
+  "检索前判断是否需要查": {
+    "notebook": "4. 检索阶段/判断是否需要继续检索.ipynb",
+    "main": "continuous_label_task",
+    "check": "feature_selection_reuse_context",
+    "check_purpose": "再次改善"
+  },
+  "拆成子问题": {
+    "notebook": "4. 检索阶段/改写检索问题.ipynb",
+    "main": "hyperparameter_vs_parameter",
+    "check": "cost_sensitive_error_components",
+    "check_purpose": "说明不适用或限制"
+  },
+  "按资料范围筛选": {
+    "notebook": "4. 检索阶段/检索前过滤无权访问的资料.ipynb",
+    "main": "restricted_page_access",
+    "check": "dbscan_scope_filter",
+    "check_purpose": "说明不适用或限制"
+  },
+  "展开相邻片段": {
+    "notebook": "6. 处理信息缺口/找到相关页面后补上相邻内容.ipynb",
+    "main": "lda_recursive_derivation",
+    "check": "gmm_em_adjacent_derivation",
+    "check_purpose": "再次改善"
+  },
+  "让模型自动拆成子问题": {
+    "notebook": "6. 处理信息缺口/让模型自动拆成子问题.ipynb",
+    "main": "auto_recursive_belief_topic",
+    "check": "auto_recursive_cv_logic",
+    "check_purpose": "确认没有改坏"
+  },
+  "Small-to-Big（父子片段）": {
+    "notebook": "6. 处理信息缺口/按句子和父子片段补充上下文.ipynb",
+    "main": "linear_regression_closed_form_vectorization",
+    "check": "belief_propagation_two_passes",
+    "check_purpose": "再次改善"
+  },
+  "AutoMerging（按命中比例合并）": {
+    "notebook": "6. 处理信息缺口/按句子和父子片段补充上下文.ipynb",
+    "main": "gmm_parameter_update_context",
+    "check": "gibbs_mh_acceptance_context",
+    "check_purpose": "确认没有改坏"
+  }
+}

@@ -1,0 +1,1387 @@
+{
+  "schema_version": 1,
+  "group_keys": [
+    "section_id",
+    "query_family_id"
+  ],
+  "grouping_method": "page_section_query_family_no_overlap_v1",
+  "assignments": {
+    "train": [
+      "semantic_query_018c0c0fdd14cfef",
+      "semantic_query_086caccfc3e342c7",
+      "semantic_query_098dd5c449d0a9b9",
+      "semantic_query_0b06496057349be2",
+      "semantic_query_0bbc9916179f1500",
+      "semantic_query_0d3b939c1aa45f07",
+      "semantic_query_0d56c5de6630715b",
+      "semantic_query_0ec73aa039cee824",
+      "semantic_query_105d89571a886cc9",
+      "semantic_query_12fdcde5c367998d",
+      "semantic_query_188aeed582c7e37a",
+      "semantic_query_1a6fa792a11178a5",
+      "semantic_query_1f6ac0e86f76da1e",
+      "semantic_query_23b95cffc00b5252",
+      "semantic_query_2742092a3b9034d0",
+      "semantic_query_2cf6f3dab131b00d",
+      "semantic_query_2dd732c159d6f470",
+      "semantic_query_323277d3ad36a244",
+      "semantic_query_376bac8d2e15f043",
+      "semantic_query_38b5e12fb20c3c85",
+      "semantic_query_3a0cce206119a04b",
+      "semantic_query_4059164fb7ff192b",
+      "semantic_query_43a2df560dc2b1c5",
+      "semantic_query_44c4a73f598f62e6",
+      "semantic_query_47cfc0c0b84f3793",
+      "semantic_query_48e5172b4ce01f9d",
+      "semantic_query_4969ca2713476c3a",
+      "semantic_query_4a71249ee11ae678",
+      "semantic_query_4c025944254e0a7a",
+      "semantic_query_4d7b2f88aee75b3a",
+      "semantic_query_4f97c31367897605",
+      "semantic_query_519a73cb2c8a6f0a",
+      "semantic_query_51af57c61e81991e",
+      "semantic_query_51b434e45b3be3ba",
+      "semantic_query_52e31efeac32da9b",
+      "semantic_query_54fcffa60885c33a",
+      "semantic_query_55105c2ea10e971e",
+      "semantic_query_56d9987774b44828",
+      "semantic_query_5ebca1bd71ed9200",
+      "semantic_query_5eecf36c4448561c",
+      "semantic_query_623af43d002b6a84",
+      "semantic_query_6425efaaaf5561d8",
+      "semantic_query_6925b51b35917bf5",
+      "semantic_query_6ad11758ea26e718",
+      "semantic_query_6dcc7da09de5e2fe",
+      "semantic_query_6de30e0a47937a06",
+      "semantic_query_7368d5bafa03de0f",
+      "semantic_query_754b61f6b43b0c17",
+      "semantic_query_777feeec933850bc",
+      "semantic_query_799f8121f0cb498f",
+      "semantic_query_7a4554b3fd38fbb3",
+      "semantic_query_7d0c974245a83c04",
+      "semantic_query_8b61f7338a497e7d",
+      "semantic_query_8bce2edb48e0cb31",
+      "semantic_query_8de9aeffa36401bd",
+      "semantic_query_9290bcf498bf6311",
+      "semantic_query_9292ce49896747d7",
+      "semantic_query_92f3397c3ba106c1",
+      "semantic_query_955aadcd417191b9",
+      "semantic_query_9560fadebdf00b4f",
+      "semantic_query_99ab4cbb34aba418",
+      "semantic_query_9a26d3634a844e19",
+      "semantic_query_9de98f84cdedfca5",
+      "semantic_query_a017e521cc5dd5d9",
+      "semantic_query_a515f929e0dd4393",
+      "semantic_query_a8f06142fda06c3a",
+      "semantic_query_ab45fc844bf4ff15",
+      "semantic_query_abb8d8798d3fa83f",
+      "semantic_query_b02f08d41ff3e3b4",
+      "semantic_query_b0e95a23613b6107",
+      "semantic_query_b6dd28e243f258a1",
+      "semantic_query_be6142e1b1b855b3",
+      "semantic_query_c0a3aee6441dfbd6",
+      "semantic_query_c21dffc380b3aa7c",
+      "semantic_query_c3310b7a9da69755",
+      "semantic_query_c3bde4d352086424",
+      "semantic_query_c4b6924757a130ae",
+      "semantic_query_c5955c7a53d2a836",
+      "semantic_query_c7f45c8655a4422b",
+      "semantic_query_c8c984aa139cb5f4",
+      "semantic_query_cc6af11025420b17",
+      "semantic_query_cc76e966cf1b6876",
+      "semantic_query_cf918406ac69f376",
+      "semantic_query_cfe443d37b3d7215",
+      "semantic_query_d65e1573e8ee291e",
+      "semantic_query_d8e291111b522748",
+      "semantic_query_dbb9d6f15588311a",
+      "semantic_query_dcdf82ba5d648947",
+      "semantic_query_e1e2c4b152a77bb4",
+      "semantic_query_e20e6d73475d5b26",
+      "semantic_query_e734717d916f962b",
+      "semantic_query_eab7bda79fd2e7a1",
+      "semantic_query_f10b0177407e5ca1",
+      "semantic_query_f1170285c367b195",
+      "semantic_query_f348b918ee3b9ba5",
+      "semantic_query_f3eabf947defc91d",
+      "semantic_query_f92d66fa5faa5d7d",
+      "semantic_query_f9910a9ec723204d",
+      "semantic_query_f9967478874e7dee",
+      "semantic_query_fccff97c41830d8a",
+      "semantic_query_febc97af12645460"
+    ],
+    "dev": [
+      "semantic_query_0731d17b3018e41d",
+      "semantic_query_0ff945582585ffb8",
+      "semantic_query_241149a7f486872a",
+      "semantic_query_2edcf7d56b9e6fec",
+      "semantic_query_2f7ff969265d311a",
+      "semantic_query_358811e1dae13ada",
+      "semantic_query_3bdedbcac541e7e1",
+      "semantic_query_3d32acd4385ef2f6",
+      "semantic_query_487fde7726bdf16d",
+      "semantic_query_4c73a4a9a1878364",
+      "semantic_query_6ecc73fdaeb0ef39",
+      "semantic_query_7a69f38fe09a7496",
+      "semantic_query_7cf536648426c379",
+      "semantic_query_82841f6538eaf681",
+      "semantic_query_83db6ab64f55a4f2",
+      "semantic_query_887b6939dd6558a0",
+      "semantic_query_8c9b513ca128c9ab",
+      "semantic_query_9012acde4c39484a",
+      "semantic_query_a16669fbc20bc59c",
+      "semantic_query_a96ac53f83f1713b",
+      "semantic_query_bcf8bdb2c1149f02",
+      "semantic_query_d2e4c4cbad477bc6",
+      "semantic_query_d52e356d9d1b6793",
+      "semantic_query_d635b6199bf1ecaa",
+      "semantic_query_d6fc1451ba2c71d6",
+      "semantic_query_d7fe3eae6f0cdb0b",
+      "semantic_query_e18a9c376efaaf4b",
+      "semantic_query_e82a07ba9fc69b00"
+    ],
+    "test": [
+      "semantic_query_0469ded3ecc4e559",
+      "semantic_query_0f069b004113e2f6",
+      "semantic_query_244034e7cd9d9e53",
+      "semantic_query_2e59978610e7eafc",
+      "semantic_query_2f662cdaf3a9084f",
+      "semantic_query_33d5effd25980785",
+      "semantic_query_342860b99fad9e2b",
+      "semantic_query_3a0f7f91b5fbe830",
+      "semantic_query_4870319ca6fdbe0a",
+      "semantic_query_48722552b97920ee",
+      "semantic_query_4e7784c6767ea477",
+      "semantic_query_50cbba97c3116660",
+      "semantic_query_54cc80597dd5326d",
+      "semantic_query_6214ea123512738e",
+      "semantic_query_639a0f096b8e30f0",
+      "semantic_query_6523c11f28699a40",
+      "semantic_query_8067fdd5723cc33b",
+      "semantic_query_88d639294c99f1e7",
+      "semantic_query_911418be3461c8da",
+      "semantic_query_921c0f062362737a",
+      "semantic_query_934bf75551eab796",
+      "semantic_query_93a40a6a04475383",
+      "semantic_query_9842c71ede2aed0b",
+      "semantic_query_9d6d76aa94c01b52",
+      "semantic_query_a45af8d431e51885",
+      "semantic_query_a89dbf1cac93b00e",
+      "semantic_query_b11ab91804cb7ab9",
+      "semantic_query_bc3e2057fdf2783a",
+      "semantic_query_c5f574c8598bf349",
+      "semantic_query_da22498cf4c5b245",
+      "semantic_query_dcf70653c4b99c41",
+      "semantic_query_f16c286b6b29b83c",
+      "semantic_query_f77b18517c8611ba",
+      "semantic_query_f805fc77d1f09c37"
+    ],
+    "regression": [
+      "model_evaluation_purpose",
+      "cross_validation_reliability",
+      "ensemble_learning_definition",
+      "slater_strong_duality",
+      "overfitting_underfitting",
+      "descent_direction",
+      "algorithm_and_model",
+      "hyperparameter_vs_parameter",
+      "continuous_attribute_split_points",
+      "decision_tree_stop_conditions",
+      "newton_hessian_cost",
+      "svm_kernel_evidence",
+      "lda_generalized_eigenvalue",
+      "newton_methods_comparison",
+      "business_model_selection",
+      "lda_multihop",
+      "lda_recursive_derivation",
+      "book_evidence_boundary",
+      "model_evaluation_followup",
+      "continuous_label_task",
+      "model_evaluation_and_macro_micro",
+      "roc_incremental_points",
+      "lda_goal_and_eigenvector",
+      "restricted_page_access",
+      "sample_space_feature_engineering",
+      "model_selection_no_absolute_best",
+      "model_selection_with_intro_scope",
+      "accuracy_vs_error_rate",
+      "f1_harmonic_mean",
+      "logistic_regression_threshold",
+      "svm_soft_margin_alpha_bounds",
+      "semi_supervised_learning_types",
+      "rule_learning_interpretability",
+      "bellman_value_function",
+      "svm_margin_generalization",
+      "linear_regression_global_optimum",
+      "random_forest_feature_sampling",
+      "perceptron_linear_separable",
+      "gaussian_mean_estimate",
+      "book_evidence_mnist",
+      "roc_threshold_process",
+      "gmm_em_cluster_assignment",
+      "macro_micro_imbalance",
+      "pca_projection_objective",
+      "lasso_sparse_solution",
+      "version_space_definition",
+      "vc_dimension_generalization_bound",
+      "feature_selection_reuse_context",
+      "cost_sensitive_error_components",
+      "dbscan_scope_filter",
+      "gmm_em_adjacent_derivation",
+      "lda_derivation_recursive_steps",
+      "bellman_with_reinforcement_scope",
+      "hyde_cv_reliability",
+      "contextual_model_eval_scope",
+      "contextual_cv_three_methods",
+      "auto_recursive_cv_logic",
+      "self_rag_generalization",
+      "agentic_svm_duality",
+      "agentic_mds_ksvd",
+      "agentic_kpca_centering",
+      "hyde_gini_impurity",
+      "self_rag_cost_threshold",
+      "auto_recursive_belief_topic",
+      "agentic_random_forest",
+      "linear_regression_closed_form_vectorization",
+      "belief_propagation_two_passes",
+      "gmm_parameter_update_context",
+      "gibbs_mh_acceptance_context",
+      "late_chunking_model_evaluation_methods"
+    ]
+  },
+  "groups": {
+    "model_evaluation_purpose": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_7982af50e2"
+    },
+    "cross_validation_reliability": {
+      "section_id": "doc_pumpkin_book:page_0019",
+      "query_family_id": "family_a38b623ee2"
+    },
+    "ensemble_learning_definition": {
+      "section_id": "doc_pumpkin_book:page_0088",
+      "query_family_id": "family_12fae8638b"
+    },
+    "slater_strong_duality": {
+      "section_id": "doc_pumpkin_book:page_0063",
+      "query_family_id": "family_55ef667705"
+    },
+    "overfitting_underfitting": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_f4e3b793b8"
+    },
+    "descent_direction": {
+      "section_id": "doc_pumpkin_book:page_0038",
+      "query_family_id": "family_8b2bea4dc8"
+    },
+    "algorithm_and_model": {
+      "section_id": "doc_pumpkin_book:page_0016",
+      "query_family_id": "family_f4a2808d51"
+    },
+    "hyperparameter_vs_parameter": {
+      "section_id": "doc_pumpkin_book:page_0019",
+      "query_family_id": "family_0e45033a8b"
+    },
+    "continuous_attribute_split_points": {
+      "section_id": "doc_pumpkin_book:page_0051",
+      "query_family_id": "family_753cb3d284"
+    },
+    "decision_tree_stop_conditions": {
+      "section_id": "doc_pumpkin_book:page_0045",
+      "query_family_id": "family_adebcbf9cd"
+    },
+    "newton_hessian_cost": {
+      "section_id": "doc_pumpkin_book:page_0039",
+      "query_family_id": "family_836b26f8a1"
+    },
+    "svm_kernel_evidence": {
+      "section_id": "doc_pumpkin_book:page_0066",
+      "query_family_id": "family_0327c7f500"
+    },
+    "lda_generalized_eigenvalue": {
+      "section_id": "doc_pumpkin_book:page_0041",
+      "query_family_id": "family_452780a556"
+    },
+    "newton_methods_comparison": {
+      "section_id": "doc_pumpkin_book:page_0038",
+      "query_family_id": "family_ba8a610f6b"
+    },
+    "business_model_selection": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_8f08456a5c"
+    },
+    "lda_multihop": {
+      "section_id": "doc_pumpkin_book:page_0041",
+      "query_family_id": "family_ca582d66ce"
+    },
+    "lda_recursive_derivation": {
+      "section_id": "doc_pumpkin_book:page_0041",
+      "query_family_id": "family_452780a556"
+    },
+    "book_evidence_boundary": {
+      "section_id": "doc_pumpkin_book:no_evidence",
+      "query_family_id": "family_e253323436"
+    },
+    "model_evaluation_followup": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_1ac1ee821d"
+    },
+    "continuous_label_task": {
+      "section_id": "doc_pumpkin_book:page_0015",
+      "query_family_id": "family_e37c9b5113"
+    },
+    "model_evaluation_and_macro_micro": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_2c4ade7af5"
+    },
+    "roc_incremental_points": {
+      "section_id": "doc_pumpkin_book:page_0023",
+      "query_family_id": "family_3f42e6ae17"
+    },
+    "lda_goal_and_eigenvector": {
+      "section_id": "doc_pumpkin_book:page_0041",
+      "query_family_id": "family_15fff18ba7"
+    },
+    "restricted_page_access": {
+      "section_id": "doc_pumpkin_book:no_evidence",
+      "query_family_id": "family_28bc13e4f6"
+    },
+    "sample_space_feature_engineering": {
+      "section_id": "doc_pumpkin_book:page_0014",
+      "query_family_id": "family_74395fa79d"
+    },
+    "model_selection_no_absolute_best": {
+      "section_id": "doc_pumpkin_book:page_0017",
+      "query_family_id": "family_23a8aaffe5"
+    },
+    "model_selection_with_intro_scope": {
+      "section_id": "doc_pumpkin_book:page_0017",
+      "query_family_id": "family_23a8aaffe5"
+    },
+    "accuracy_vs_error_rate": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_ce565ac576"
+    },
+    "f1_harmonic_mean": {
+      "section_id": "doc_pumpkin_book:page_0020",
+      "query_family_id": "family_6c0dc5d5af"
+    },
+    "logistic_regression_threshold": {
+      "section_id": "doc_pumpkin_book:page_0036",
+      "query_family_id": "family_7d1407f297"
+    },
+    "svm_soft_margin_alpha_bounds": {
+      "section_id": "doc_pumpkin_book:page_0067",
+      "query_family_id": "family_21a03bc2a7"
+    },
+    "semi_supervised_learning_types": {
+      "section_id": "doc_pumpkin_book:page_0164",
+      "query_family_id": "family_492a6e86d5"
+    },
+    "rule_learning_interpretability": {
+      "section_id": "doc_pumpkin_book:page_0191",
+      "query_family_id": "family_41307e0254"
+    },
+    "bellman_value_function": {
+      "section_id": "doc_pumpkin_book:page_0194",
+      "query_family_id": "family_1eaf089aea"
+    },
+    "svm_margin_generalization": {
+      "section_id": "doc_pumpkin_book:page_0060",
+      "query_family_id": "family_53e5923e44"
+    },
+    "linear_regression_global_optimum": {
+      "section_id": "doc_pumpkin_book:page_0036",
+      "query_family_id": "family_7edc1a3810"
+    },
+    "random_forest_feature_sampling": {
+      "section_id": "doc_pumpkin_book:page_0100",
+      "query_family_id": "family_be51b7f7fd"
+    },
+    "perceptron_linear_separable": {
+      "section_id": "doc_pumpkin_book:page_0054",
+      "query_family_id": "family_cda4f69032"
+    },
+    "gaussian_mean_estimate": {
+      "section_id": "doc_pumpkin_book:page_0077",
+      "query_family_id": "family_b85dfd3821"
+    },
+    "book_evidence_mnist": {
+      "section_id": "doc_pumpkin_book:no_evidence",
+      "query_family_id": "family_7967b0e6b6"
+    },
+    "roc_threshold_process": {
+      "section_id": "doc_pumpkin_book:page_0021",
+      "query_family_id": "family_5451046f89"
+    },
+    "gmm_em_cluster_assignment": {
+      "section_id": "doc_pumpkin_book:page_0113",
+      "query_family_id": "family_8fec43e433"
+    },
+    "macro_micro_imbalance": {
+      "section_id": "doc_pumpkin_book:page_0021",
+      "query_family_id": "family_3eee73f1fb"
+    },
+    "pca_projection_objective": {
+      "section_id": "doc_pumpkin_book:page_0127",
+      "query_family_id": "family_245602d4af"
+    },
+    "lasso_sparse_solution": {
+      "section_id": "doc_pumpkin_book:page_0140",
+      "query_family_id": "family_3adfaa3e0f"
+    },
+    "version_space_definition": {
+      "section_id": "doc_pumpkin_book:page_0016",
+      "query_family_id": "family_f4a2808d51"
+    },
+    "vc_dimension_generalization_bound": {
+      "section_id": "doc_pumpkin_book:page_0154",
+      "query_family_id": "family_8877f8a994"
+    },
+    "feature_selection_reuse_context": {
+      "section_id": "doc_pumpkin_book:page_0139",
+      "query_family_id": "family_e7a8042586"
+    },
+    "cost_sensitive_error_components": {
+      "section_id": "doc_pumpkin_book:page_0024",
+      "query_family_id": "family_5a4d098f96"
+    },
+    "dbscan_scope_filter": {
+      "section_id": "doc_pumpkin_book:no_evidence",
+      "query_family_id": "family_28bc13e4f6"
+    },
+    "gmm_em_adjacent_derivation": {
+      "section_id": "doc_pumpkin_book:page_0116",
+      "query_family_id": "family_a6dfe2fa35"
+    },
+    "lda_derivation_recursive_steps": {
+      "section_id": "doc_pumpkin_book:page_0041",
+      "query_family_id": "family_452780a556"
+    },
+    "bellman_with_reinforcement_scope": {
+      "section_id": "doc_pumpkin_book:page_0194",
+      "query_family_id": "family_94756bd7fc"
+    },
+    "hyde_cv_reliability": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_98584f9db3"
+    },
+    "contextual_model_eval_scope": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_7982af50e2"
+    },
+    "contextual_cv_three_methods": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_ce565ac576"
+    },
+    "auto_recursive_cv_logic": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_e42868db29"
+    },
+    "self_rag_generalization": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_1ac1ee821d"
+    },
+    "agentic_svm_duality": {
+      "section_id": "doc_pumpkin_book:page_0063",
+      "query_family_id": "family_83c9775228"
+    },
+    "agentic_mds_ksvd": {
+      "section_id": "doc_pumpkin_book:page_0133",
+      "query_family_id": "family_5c643be39c"
+    },
+    "agentic_kpca_centering": {
+      "section_id": "doc_pumpkin_book:page_0132",
+      "query_family_id": "family_90ca0a90e1"
+    },
+    "hyde_gini_impurity": {
+      "section_id": "doc_pumpkin_book:page_0049",
+      "query_family_id": "family_fc9108e668"
+    },
+    "self_rag_cost_threshold": {
+      "section_id": "doc_pumpkin_book:page_0025",
+      "query_family_id": "family_f813b6d0c7"
+    },
+    "auto_recursive_belief_topic": {
+      "section_id": "doc_pumpkin_book:page_0183",
+      "query_family_id": "family_97acb937f6"
+    },
+    "agentic_random_forest": {
+      "section_id": "doc_pumpkin_book:page_0100",
+      "query_family_id": "family_6140c8afe6"
+    },
+    "linear_regression_closed_form_vectorization": {
+      "section_id": "doc_pumpkin_book:page_0033",
+      "query_family_id": "family_39d50b02b1"
+    },
+    "belief_propagation_two_passes": {
+      "section_id": "doc_pumpkin_book:page_0182",
+      "query_family_id": "family_beb7baf162"
+    },
+    "gmm_parameter_update_context": {
+      "section_id": "doc_pumpkin_book:page_0116",
+      "query_family_id": "family_e8535db99e"
+    },
+    "gibbs_mh_acceptance_context": {
+      "section_id": "doc_pumpkin_book:page_0184",
+      "query_family_id": "family_e8a4b9970c"
+    },
+    "late_chunking_model_evaluation_methods": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "family_ce565ac576"
+    },
+    "semantic_query_e82a07ba9fc69b00": {
+      "section_id": "doc_pumpkin_book:page_0129",
+      "query_family_id": "semantic_family_2374815b216a1932"
+    },
+    "semantic_query_d7fe3eae6f0cdb0b": {
+      "section_id": "doc_pumpkin_book:page_0129",
+      "query_family_id": "semantic_family_ffe96ba6d507d41a"
+    },
+    "semantic_query_a16669fbc20bc59c": {
+      "section_id": "doc_pumpkin_book:page_0129",
+      "query_family_id": "semantic_family_1789fa2f6d2cdca4"
+    },
+    "semantic_query_d2e4c4cbad477bc6": {
+      "section_id": "doc_pumpkin_book:page_0133",
+      "query_family_id": "semantic_family_bd0f882571bad197"
+    },
+    "semantic_query_7a69f38fe09a7496": {
+      "section_id": "doc_pumpkin_book:page_0133",
+      "query_family_id": "semantic_family_a702df6f55a63682"
+    },
+    "semantic_query_82841f6538eaf681": {
+      "section_id": "doc_pumpkin_book:page_0135",
+      "query_family_id": "semantic_family_9cfbac04eefa9b6f"
+    },
+    "semantic_query_887b6939dd6558a0": {
+      "section_id": "doc_pumpkin_book:page_0136",
+      "query_family_id": "semantic_family_17f3e0573dd73f3e"
+    },
+    "semantic_query_0731d17b3018e41d": {
+      "section_id": "doc_pumpkin_book:page_0137",
+      "query_family_id": "semantic_family_6b7b427415318e27"
+    },
+    "semantic_query_6ecc73fdaeb0ef39": {
+      "section_id": "doc_pumpkin_book:page_0137",
+      "query_family_id": "semantic_family_ce2bcacf0736af9b"
+    },
+    "section_id": "doc_pumpkin_book:page_0118",
+    "semantic_query_bcf8bdb2c1149f02": {
+      "section_id": "doc_pumpkin_book:page_0138",
+      "query_family_id": "semantic_family_1aca787c9c09e920"
+    },
+    "semantic_query_3d32acd4385ef2f6": {
+      "section_id": "doc_pumpkin_book:page_0139",
+      "query_family_id": "semantic_family_872cfa404bd6b445"
+    },
+    "semantic_query_4c73a4a9a1878364": {
+      "section_id": "doc_pumpkin_book:page_0139",
+      "query_family_id": "semantic_family_a4206ee80c6a8366"
+    },
+    "semantic_query_3bdedbcac541e7e1": {
+      "section_id": "doc_pumpkin_book:page_0139",
+      "query_family_id": "semantic_family_459e4ace7b7cf283"
+    },
+    "semantic_query_d52e356d9d1b6793": {
+      "section_id": "doc_pumpkin_book:page_0144",
+      "query_family_id": "semantic_family_97ec482757e00c57"
+    },
+    "semantic_query_a96ac53f83f1713b": {
+      "section_id": "doc_pumpkin_book:page_0146",
+      "query_family_id": "semantic_family_fe70279dc9ae6644"
+    },
+    "semantic_query_9012acde4c39484a": {
+      "section_id": "doc_pumpkin_book:page_0147",
+      "query_family_id": "semantic_family_ff8bcc0a5275d0d4"
+    },
+    "semantic_query_d635b6199bf1ecaa": {
+      "section_id": "doc_pumpkin_book:page_0149",
+      "query_family_id": "semantic_family_95e4cbfb7ca1f57b"
+    },
+    "semantic_query_e18a9c376efaaf4b": {
+      "section_id": "doc_pumpkin_book:page_0149",
+      "query_family_id": "semantic_family_b8903f0acf04c0ff"
+    },
+    "semantic_query_487fde7726bdf16d": {
+      "section_id": "doc_pumpkin_book:page_0149",
+      "query_family_id": "semantic_family_4226f728dc16f1c5"
+    },
+    "semantic_query_83db6ab64f55a4f2": {
+      "section_id": "doc_pumpkin_book:page_0149",
+      "query_family_id": "semantic_family_319992f7328bee31"
+    },
+    "semantic_query_2edcf7d56b9e6fec": {
+      "section_id": "doc_pumpkin_book:page_0151",
+      "query_family_id": "semantic_family_30a471349750db9c"
+    },
+    "semantic_query_2f7ff969265d311a": {
+      "section_id": "doc_pumpkin_book:page_0151",
+      "query_family_id": "semantic_family_73397e0385ee16cb"
+    },
+    "semantic_query_241149a7f486872a": {
+      "section_id": "doc_pumpkin_book:page_0151",
+      "query_family_id": "semantic_family_7fa0fba1d53a2d5c"
+    },
+    "semantic_query_d6fc1451ba2c71d6": {
+      "section_id": "doc_pumpkin_book:page_0151",
+      "query_family_id": "semantic_family_1fd9f93a8c929881"
+    },
+    "semantic_query_0ff945582585ffb8": {
+      "section_id": "doc_pumpkin_book:page_0154",
+      "query_family_id": "semantic_family_719ea0e10be8dd25"
+    },
+    "semantic_query_358811e1dae13ada": {
+      "section_id": "doc_pumpkin_book:page_0154",
+      "query_family_id": "semantic_family_58408c1ac0fbc775"
+    },
+    "semantic_query_8c9b513ca128c9ab": {
+      "section_id": "doc_pumpkin_book:page_0155",
+      "query_family_id": "semantic_family_9a9c86cefc3fa707"
+    },
+    "semantic_query_7cf536648426c379": {
+      "section_id": "doc_pumpkin_book:page_0155",
+      "query_family_id": "semantic_family_1cb39f452fdddae6"
+    },
+    "semantic_query_da22498cf4c5b245": {
+      "section_id": "doc_pumpkin_book:page_0158",
+      "query_family_id": "semantic_family_b1104a009ca8b9db"
+    },
+    "semantic_query_88d639294c99f1e7": {
+      "section_id": "doc_pumpkin_book:page_0158",
+      "query_family_id": "semantic_family_2d773ea96f382bd1"
+    },
+    "semantic_query_48722552b97920ee": {
+      "section_id": "doc_pumpkin_book:page_0162",
+      "query_family_id": "semantic_family_c0691aabbb0511b0"
+    },
+    "semantic_query_0f069b004113e2f6": {
+      "section_id": "doc_pumpkin_book:page_0162",
+      "query_family_id": "semantic_family_a120e5daea940e37"
+    },
+    "semantic_query_2f662cdaf3a9084f": {
+      "section_id": "doc_pumpkin_book:page_0164",
+      "query_family_id": "semantic_family_8227e9581da98976"
+    },
+    "semantic_query_639a0f096b8e30f0": {
+      "section_id": "doc_pumpkin_book:page_0164",
+      "query_family_id": "semantic_family_f418faf9e6477a86"
+    },
+    "semantic_query_934bf75551eab796": {
+      "section_id": "doc_pumpkin_book:page_0165",
+      "query_family_id": "semantic_family_3b38c39594f13732"
+    },
+    "semantic_query_a45af8d431e51885": {
+      "section_id": "doc_pumpkin_book:page_0166",
+      "query_family_id": "semantic_family_3756772f42202003"
+    },
+    "semantic_query_50cbba97c3116660": {
+      "section_id": "doc_pumpkin_book:page_0166",
+      "query_family_id": "semantic_family_0ff5e0d069d803c8"
+    },
+    "semantic_query_a89dbf1cac93b00e": {
+      "section_id": "doc_pumpkin_book:page_0169",
+      "query_family_id": "semantic_family_7da0a3f2b4e7847d"
+    },
+    "semantic_query_9d6d76aa94c01b52": {
+      "section_id": "doc_pumpkin_book:page_0169",
+      "query_family_id": "semantic_family_2b28d998d6a534c3"
+    },
+    "semantic_query_33d5effd25980785": {
+      "section_id": "doc_pumpkin_book:page_0170",
+      "query_family_id": "semantic_family_ba1dc43a5019b901"
+    },
+    "semantic_query_2e59978610e7eafc": {
+      "section_id": "doc_pumpkin_book:page_0170",
+      "query_family_id": "semantic_family_2a96375ea49539ee"
+    },
+    "semantic_query_6214ea123512738e": {
+      "section_id": "doc_pumpkin_book:page_0171",
+      "query_family_id": "semantic_family_dcfbac5b87b48f8d"
+    },
+    "semantic_query_dcf70653c4b99c41": {
+      "section_id": "doc_pumpkin_book:page_0171",
+      "query_family_id": "semantic_family_cae201601344b5d9"
+    },
+    "semantic_query_244034e7cd9d9e53": {
+      "section_id": "doc_pumpkin_book:page_0172",
+      "query_family_id": "semantic_family_d325760109200f08"
+    },
+    "semantic_query_c5f574c8598bf349": {
+      "section_id": "doc_pumpkin_book:page_0172",
+      "query_family_id": "semantic_family_1dc55a8bf7e8fc89"
+    },
+    "semantic_query_4e7784c6767ea477": {
+      "section_id": "doc_pumpkin_book:page_0173",
+      "query_family_id": "semantic_family_8974d559757bad6a"
+    },
+    "semantic_query_3a0f7f91b5fbe830": {
+      "section_id": "doc_pumpkin_book:page_0173",
+      "query_family_id": "semantic_family_493f97cf0d9c18c4"
+    },
+    "semantic_query_93a40a6a04475383": {
+      "section_id": "doc_pumpkin_book:page_0175",
+      "query_family_id": "semantic_family_35d12111927014b0"
+    },
+    "semantic_query_911418be3461c8da": {
+      "section_id": "doc_pumpkin_book:page_0175",
+      "query_family_id": "semantic_family_dae8a5fd0e739cf8"
+    },
+    "semantic_query_b11ab91804cb7ab9": {
+      "section_id": "doc_pumpkin_book:page_0175",
+      "query_family_id": "semantic_family_b500bf313b35fb53"
+    },
+    "semantic_query_921c0f062362737a": {
+      "section_id": "doc_pumpkin_book:page_0176",
+      "query_family_id": "semantic_family_196a801481bdf1a6"
+    },
+    "semantic_query_bc3e2057fdf2783a": {
+      "section_id": "doc_pumpkin_book:page_0178",
+      "query_family_id": "semantic_family_7e1899cd96d39291"
+    },
+    "semantic_query_f77b18517c8611ba": {
+      "section_id": "doc_pumpkin_book:page_0178",
+      "query_family_id": "semantic_family_16fdbc096b80afbc"
+    },
+    "semantic_query_6523c11f28699a40": {
+      "section_id": "doc_pumpkin_book:page_0178",
+      "query_family_id": "semantic_family_d609b0187dbda2c5"
+    },
+    "semantic_query_9842c71ede2aed0b": {
+      "section_id": "doc_pumpkin_book:page_0179",
+      "query_family_id": "semantic_family_89008495a97e6454"
+    },
+    "semantic_query_342860b99fad9e2b": {
+      "section_id": "doc_pumpkin_book:page_0179",
+      "query_family_id": "semantic_family_1c91b9cc080b7225"
+    },
+    "semantic_query_0469ded3ecc4e559": {
+      "section_id": "doc_pumpkin_book:page_0180",
+      "query_family_id": "semantic_family_abc1a53d15d0b604"
+    },
+    "semantic_query_f805fc77d1f09c37": {
+      "section_id": "doc_pumpkin_book:page_0180",
+      "query_family_id": "semantic_family_01626a1bfc261b99"
+    },
+    "semantic_query_8067fdd5723cc33b": {
+      "section_id": "doc_pumpkin_book:page_0181",
+      "query_family_id": "semantic_family_cd7dc78dd8b0c3e3"
+    },
+    "semantic_query_f16c286b6b29b83c": {
+      "section_id": "doc_pumpkin_book:page_0181",
+      "query_family_id": "semantic_family_d8e2e8b7b121dca4"
+    },
+    "semantic_query_4870319ca6fdbe0a": {
+      "section_id": "doc_pumpkin_book:page_0183",
+      "query_family_id": "semantic_family_e505fa0bc22bba6f"
+    },
+    "semantic_query_54cc80597dd5326d": {
+      "section_id": "doc_pumpkin_book:page_0183",
+      "query_family_id": "semantic_family_80af75498bc21e48"
+    },
+    "semantic_query_955aadcd417191b9": {
+      "section_id": "doc_pumpkin_book:page_0014",
+      "query_family_id": "semantic_family_5cf620b8307d6dfc"
+    },
+    "semantic_query_0b06496057349be2": {
+      "section_id": "doc_pumpkin_book:page_0014",
+      "query_family_id": "semantic_family_30afd6155aa599f9"
+    },
+    "semantic_query_754b61f6b43b0c17": {
+      "section_id": "doc_pumpkin_book:page_0014",
+      "query_family_id": "semantic_family_9293e31e997ff22b"
+    },
+    "semantic_query_e1e2c4b152a77bb4": {
+      "section_id": "doc_pumpkin_book:page_0015",
+      "query_family_id": "semantic_family_db8e7b72c5a35f59"
+    },
+    "semantic_query_abb8d8798d3fa83f": {
+      "section_id": "doc_pumpkin_book:page_0015",
+      "query_family_id": "semantic_family_98cb0158ea75e665"
+    },
+    "semantic_query_f9910a9ec723204d": {
+      "section_id": "doc_pumpkin_book:page_0015",
+      "query_family_id": "semantic_family_351d8b239d20ec06"
+    },
+    "semantic_query_098dd5c449d0a9b9": {
+      "section_id": "doc_pumpkin_book:page_0016",
+      "query_family_id": "semantic_family_ca2d6dd34a62f723"
+    },
+    "semantic_query_f348b918ee3b9ba5": {
+      "section_id": "doc_pumpkin_book:page_0016",
+      "query_family_id": "semantic_family_080a6654b88e615b"
+    },
+    "semantic_query_9560fadebdf00b4f": {
+      "section_id": "doc_pumpkin_book:page_0016",
+      "query_family_id": "semantic_family_c590fc161ba8311d"
+    },
+    "semantic_query_c8c984aa139cb5f4": {
+      "section_id": "doc_pumpkin_book:page_0016",
+      "query_family_id": "semantic_family_bd9b55df1133acd6"
+    },
+    "semantic_query_7368d5bafa03de0f": {
+      "section_id": "doc_pumpkin_book:page_0017",
+      "query_family_id": "semantic_family_724604fca29eae90"
+    },
+    "semantic_query_48e5172b4ce01f9d": {
+      "section_id": "doc_pumpkin_book:page_0017",
+      "query_family_id": "semantic_family_f6594586da5ae573"
+    },
+    "semantic_query_777feeec933850bc": {
+      "section_id": "doc_pumpkin_book:page_0017",
+      "query_family_id": "semantic_family_b6331783c68daa24"
+    },
+    "semantic_query_0ec73aa039cee824": {
+      "section_id": "doc_pumpkin_book:page_0018",
+      "query_family_id": "semantic_family_107c5d8f9f7042f8"
+    },
+    "semantic_query_b0e95a23613b6107": {
+      "section_id": "doc_pumpkin_book:page_0019",
+      "query_family_id": "semantic_family_176dc6b548f6bb33"
+    },
+    "semantic_query_51af57c61e81991e": {
+      "section_id": "doc_pumpkin_book:page_0019",
+      "query_family_id": "semantic_family_e6062fe1adbfada6"
+    },
+    "semantic_query_52e31efeac32da9b": {
+      "section_id": "doc_pumpkin_book:page_0019",
+      "query_family_id": "semantic_family_1ccfcf35f77d5ab7"
+    },
+    "semantic_query_8b61f7338a497e7d": {
+      "section_id": "doc_pumpkin_book:page_0020",
+      "query_family_id": "semantic_family_5f7c1f9ed4edd5c9"
+    },
+    "semantic_query_6de30e0a47937a06": {
+      "section_id": "doc_pumpkin_book:page_0021",
+      "query_family_id": "semantic_family_2300a60beefcb31a"
+    },
+    "semantic_query_f1170285c367b195": {
+      "section_id": "doc_pumpkin_book:page_0021",
+      "query_family_id": "semantic_family_10608d31594b3194"
+    },
+    "semantic_query_3a0cce206119a04b": {
+      "section_id": "doc_pumpkin_book:page_0021",
+      "query_family_id": "semantic_family_819643699d56b75a"
+    },
+    "semantic_query_5eecf36c4448561c": {
+      "section_id": "doc_pumpkin_book:page_0026",
+      "query_family_id": "semantic_family_295b622c7dcd6db2"
+    },
+    "semantic_query_a515f929e0dd4393": {
+      "section_id": "doc_pumpkin_book:page_0026",
+      "query_family_id": "semantic_family_078ba5d1c5329105"
+    },
+    "semantic_query_4059164fb7ff192b": {
+      "section_id": "doc_pumpkin_book:page_0027",
+      "query_family_id": "semantic_family_09cb372480556ea1"
+    },
+    "semantic_query_6925b51b35917bf5": {
+      "section_id": "doc_pumpkin_book:page_0028",
+      "query_family_id": "semantic_family_dc1bd823be5a0fff"
+    },
+    "semantic_query_799f8121f0cb498f": {
+      "section_id": "doc_pumpkin_book:page_0028",
+      "query_family_id": "semantic_family_bed0d7c4cfb6696c"
+    },
+    "semantic_query_2742092a3b9034d0": {
+      "section_id": "doc_pumpkin_book:page_0029",
+      "query_family_id": "semantic_family_90d5516b935dee70"
+    },
+    "semantic_query_9de98f84cdedfca5": {
+      "section_id": "doc_pumpkin_book:page_0029",
+      "query_family_id": "semantic_family_50e2e4cdd61bf316"
+    },
+    "semantic_query_9a26d3634a844e19": {
+      "section_id": "doc_pumpkin_book:page_0033",
+      "query_family_id": "semantic_family_b5c48f3f129c9ba2"
+    },
+    "semantic_query_56d9987774b44828": {
+      "section_id": "doc_pumpkin_book:page_0033",
+      "query_family_id": "semantic_family_d6cc7f7b2abaff97"
+    },
+    "semantic_query_4969ca2713476c3a": {
+      "section_id": "doc_pumpkin_book:page_0034",
+      "query_family_id": "semantic_family_60b9ea44b53b11ce"
+    },
+    "semantic_query_38b5e12fb20c3c85": {
+      "section_id": "doc_pumpkin_book:page_0038",
+      "query_family_id": "semantic_family_3cc9fc0a543249b1"
+    },
+    "semantic_query_eab7bda79fd2e7a1": {
+      "section_id": "doc_pumpkin_book:page_0038",
+      "query_family_id": "semantic_family_950416beafa266d6"
+    },
+    "semantic_query_6ad11758ea26e718": {
+      "section_id": "doc_pumpkin_book:page_0039",
+      "query_family_id": "semantic_family_b159bfb1e2cbfdaa"
+    },
+    "semantic_query_0d56c5de6630715b": {
+      "section_id": "doc_pumpkin_book:page_0041",
+      "query_family_id": "semantic_family_4ef88d3f78a993ca"
+    },
+    "semantic_query_cc76e966cf1b6876": {
+      "section_id": "doc_pumpkin_book:page_0044",
+      "query_family_id": "semantic_family_1479e799a10b4322"
+    },
+    "semantic_query_dbb9d6f15588311a": {
+      "section_id": "doc_pumpkin_book:page_0048",
+      "query_family_id": "semantic_family_9a38ffeb068b558e"
+    },
+    "semantic_query_be6142e1b1b855b3": {
+      "section_id": "doc_pumpkin_book:page_0048",
+      "query_family_id": "semantic_family_c675ffad58036da1"
+    },
+    "semantic_query_c4b6924757a130ae": {
+      "section_id": "doc_pumpkin_book:page_0049",
+      "query_family_id": "semantic_family_48c3222b3e3f714e"
+    },
+    "semantic_query_4d7b2f88aee75b3a": {
+      "section_id": "doc_pumpkin_book:page_0051",
+      "query_family_id": "semantic_family_5185903dbe6cb413"
+    },
+    "semantic_query_43a2df560dc2b1c5": {
+      "section_id": "doc_pumpkin_book:page_0051",
+      "query_family_id": "semantic_family_064acbee93300723"
+    },
+    "semantic_query_ab45fc844bf4ff15": {
+      "section_id": "doc_pumpkin_book:page_0051",
+      "query_family_id": "semantic_family_363a3ffef5ee65a1"
+    },
+    "semantic_query_cfe443d37b3d7215": {
+      "section_id": "doc_pumpkin_book:page_0051",
+      "query_family_id": "semantic_family_ebc2ae7f13aa6538"
+    },
+    "semantic_query_1f6ac0e86f76da1e": {
+      "section_id": "doc_pumpkin_book:page_0052",
+      "query_family_id": "semantic_family_1bf06efa7cfb1eaf"
+    },
+    "semantic_query_23b95cffc00b5252": {
+      "section_id": "doc_pumpkin_book:page_0052",
+      "query_family_id": "semantic_family_31cd0856bf6b5ef2"
+    },
+    "semantic_query_0bbc9916179f1500": {
+      "section_id": "doc_pumpkin_book:page_0056",
+      "query_family_id": "semantic_family_114f0a01d0e4ab2e"
+    },
+    "semantic_query_2cf6f3dab131b00d": {
+      "section_id": "doc_pumpkin_book:page_0060",
+      "query_family_id": "semantic_family_750ed16d3f9ce1b5"
+    },
+    "semantic_query_dcdf82ba5d648947": {
+      "section_id": "doc_pumpkin_book:page_0060",
+      "query_family_id": "semantic_family_f5659f5abe44a0ca"
+    },
+    "semantic_query_f9967478874e7dee": {
+      "section_id": "doc_pumpkin_book:page_0060",
+      "query_family_id": "semantic_family_614d4db9b6d01799"
+    },
+    "semantic_query_92f3397c3ba106c1": {
+      "section_id": "doc_pumpkin_book:page_0062",
+      "query_family_id": "semantic_family_ec8279c011e07292"
+    },
+    "semantic_query_47cfc0c0b84f3793": {
+      "section_id": "doc_pumpkin_book:page_0064",
+      "query_family_id": "semantic_family_96911328821e8141"
+    },
+    "semantic_query_188aeed582c7e37a": {
+      "section_id": "doc_pumpkin_book:page_0064",
+      "query_family_id": "semantic_family_17bc5733da47d083"
+    },
+    "semantic_query_4a71249ee11ae678": {
+      "section_id": "doc_pumpkin_book:page_0064",
+      "query_family_id": "semantic_family_fcf984291aca06d5"
+    },
+    "semantic_query_9290bcf498bf6311": {
+      "section_id": "doc_pumpkin_book:page_0066",
+      "query_family_id": "semantic_family_46f9eda18a3b357f"
+    },
+    "semantic_query_d8e291111b522748": {
+      "section_id": "doc_pumpkin_book:page_0068",
+      "query_family_id": "semantic_family_facaac6bd40a3ed3"
+    },
+    "semantic_query_519a73cb2c8a6f0a": {
+      "section_id": "doc_pumpkin_book:page_0068",
+      "query_family_id": "semantic_family_ab2df0f6deec44ad"
+    },
+    "semantic_query_cc6af11025420b17": {
+      "section_id": "doc_pumpkin_book:page_0069",
+      "query_family_id": "semantic_family_e8d50e94fc1bb7c2"
+    },
+    "semantic_query_51b434e45b3be3ba": {
+      "section_id": "doc_pumpkin_book:page_0069",
+      "query_family_id": "semantic_family_7ee7c1eb6b1624df"
+    },
+    "semantic_query_e20e6d73475d5b26": {
+      "section_id": "doc_pumpkin_book:page_0070",
+      "query_family_id": "semantic_family_6d2f78dc1f4a0aa0"
+    },
+    "semantic_query_e734717d916f962b": {
+      "section_id": "doc_pumpkin_book:page_0072",
+      "query_family_id": "semantic_family_a14958d16e67b60e"
+    },
+    "semantic_query_55105c2ea10e971e": {
+      "section_id": "doc_pumpkin_book:page_0074",
+      "query_family_id": "semantic_family_54bad9f47626aba8"
+    },
+    "semantic_query_b6dd28e243f258a1": {
+      "section_id": "doc_pumpkin_book:page_0076",
+      "query_family_id": "semantic_family_20de21315b78324f"
+    },
+    "semantic_query_623af43d002b6a84": {
+      "section_id": "doc_pumpkin_book:page_0082",
+      "query_family_id": "semantic_family_e2b35ed7541117ac"
+    },
+    "semantic_query_086caccfc3e342c7": {
+      "section_id": "doc_pumpkin_book:page_0082",
+      "query_family_id": "semantic_family_400195d20fd37424"
+    },
+    "semantic_query_c3310b7a9da69755": {
+      "section_id": "doc_pumpkin_book:page_0087",
+      "query_family_id": "semantic_family_913abe01eb491b12"
+    },
+    "semantic_query_6425efaaaf5561d8": {
+      "section_id": "doc_pumpkin_book:page_0088",
+      "query_family_id": "semantic_family_7ef8ab506f01923c"
+    },
+    "semantic_query_c21dffc380b3aa7c": {
+      "section_id": "doc_pumpkin_book:page_0088",
+      "query_family_id": "semantic_family_edafa79f407ee984"
+    },
+    "semantic_query_7d0c974245a83c04": {
+      "section_id": "doc_pumpkin_book:page_0089",
+      "query_family_id": "semantic_family_c4e3f0099bb3de0a"
+    },
+    "semantic_query_d65e1573e8ee291e": {
+      "section_id": "doc_pumpkin_book:page_0090",
+      "query_family_id": "semantic_family_7ae4ce7a7d98160e"
+    },
+    "semantic_query_5ebca1bd71ed9200": {
+      "section_id": "doc_pumpkin_book:page_0090",
+      "query_family_id": "semantic_family_619b0ca6a2371f44"
+    },
+    "semantic_query_febc97af12645460": {
+      "section_id": "doc_pumpkin_book:page_0092",
+      "query_family_id": "semantic_family_0c403fffcd5401c9"
+    },
+    "semantic_query_c7f45c8655a4422b": {
+      "section_id": "doc_pumpkin_book:page_0092",
+      "query_family_id": "semantic_family_df0e25e667f28598"
+    },
+    "semantic_query_12fdcde5c367998d": {
+      "section_id": "doc_pumpkin_book:page_0092",
+      "query_family_id": "semantic_family_f7d95e96a7c7a029"
+    },
+    "semantic_query_99ab4cbb34aba418": {
+      "section_id": "doc_pumpkin_book:page_0100",
+      "query_family_id": "semantic_family_4f313dd2c423f939"
+    },
+    "semantic_query_a8f06142fda06c3a": {
+      "section_id": "doc_pumpkin_book:page_0100",
+      "query_family_id": "semantic_family_634252334e31f31f"
+    },
+    "semantic_query_0d3b939c1aa45f07": {
+      "section_id": "doc_pumpkin_book:page_0102",
+      "query_family_id": "semantic_family_d347dd33c6d60efb"
+    },
+    "semantic_query_b02f08d41ff3e3b4": {
+      "section_id": "doc_pumpkin_book:page_0103",
+      "query_family_id": "semantic_family_43e827956d21cbe4"
+    },
+    "semantic_query_8de9aeffa36401bd": {
+      "section_id": "doc_pumpkin_book:page_0104",
+      "query_family_id": "semantic_family_e9bda77e63e1b886"
+    },
+    "semantic_query_c0a3aee6441dfbd6": {
+      "section_id": "doc_pumpkin_book:page_0104",
+      "query_family_id": "semantic_family_cfb2b56524f242fd"
+    },
+    "semantic_query_4c025944254e0a7a": {
+      "section_id": "doc_pumpkin_book:page_0104",
+      "query_family_id": "semantic_family_ce51a3301ad7fd2c"
+    },
+    "semantic_query_323277d3ad36a244": {
+      "section_id": "doc_pumpkin_book:page_0107",
+      "query_family_id": "semantic_family_bc43057df60a3d99"
+    },
+    "semantic_query_f3eabf947defc91d": {
+      "section_id": "doc_pumpkin_book:page_0107",
+      "query_family_id": "semantic_family_78a5e1c0fb05d1e1"
+    },
+    "semantic_query_8bce2edb48e0cb31": {
+      "section_id": "doc_pumpkin_book:page_0108",
+      "query_family_id": "semantic_family_d7571aa300b6fdea"
+    },
+    "semantic_query_018c0c0fdd14cfef": {
+      "section_id": "doc_pumpkin_book:page_0108",
+      "query_family_id": "semantic_family_b19bc782f8a7a3a0"
+    },
+    "semantic_query_cf918406ac69f376": {
+      "section_id": "doc_pumpkin_book:page_0108",
+      "query_family_id": "semantic_family_1464474f719bc533"
+    },
+    "semantic_query_f10b0177407e5ca1": {
+      "section_id": "doc_pumpkin_book:page_0110",
+      "query_family_id": "semantic_family_ae99209761c532cb"
+    },
+    "semantic_query_44c4a73f598f62e6": {
+      "section_id": "doc_pumpkin_book:page_0110",
+      "query_family_id": "semantic_family_67875a379b5e9e27"
+    },
+    "semantic_query_c3bde4d352086424": {
+      "section_id": "doc_pumpkin_book:page_0110",
+      "query_family_id": "semantic_family_7eb22edbbf5496c7"
+    },
+    "semantic_query_1a6fa792a11178a5": {
+      "section_id": "doc_pumpkin_book:page_0111",
+      "query_family_id": "semantic_family_f46deae7d66b7b57"
+    },
+    "semantic_query_4f97c31367897605": {
+      "section_id": "doc_pumpkin_book:page_0113",
+      "query_family_id": "semantic_family_5d7db094769f39ae"
+    },
+    "semantic_query_9292ce49896747d7": {
+      "section_id": "doc_pumpkin_book:page_0116",
+      "query_family_id": "semantic_family_1ae1cfb43b96073d"
+    },
+    "semantic_query_7a4554b3fd38fbb3": {
+      "section_id": "doc_pumpkin_book:page_0116",
+      "query_family_id": "semantic_family_508d752b623eaf43"
+    },
+    "semantic_query_f92d66fa5faa5d7d": {
+      "section_id": "doc_pumpkin_book:page_0118",
+      "query_family_id": "semantic_family_35263d4b7ec4aa56"
+    },
+    "semantic_query_fccff97c41830d8a": {
+      "section_id": "doc_pumpkin_book:page_0119",
+      "query_family_id": "semantic_family_f02997639b9ad819"
+    },
+    "semantic_query_c5955c7a53d2a836": {
+      "section_id": "doc_pumpkin_book:page_0119",
+      "query_family_id": "semantic_family_a942a086ff0d91cc"
+    },
+    "semantic_query_6dcc7da09de5e2fe": {
+      "section_id": "doc_pumpkin_book:page_0119",
+      "query_family_id": "semantic_family_f1085316afcc2512"
+    },
+    "semantic_query_376bac8d2e15f043": {
+      "section_id": "doc_pumpkin_book:page_0120",
+      "query_family_id": "semantic_family_9d1a19af057e0b06"
+    },
+    "semantic_query_2dd732c159d6f470": {
+      "section_id": "doc_pumpkin_book:page_0120",
+      "query_family_id": "semantic_family_91d7148a0ee6a695"
+    },
+    "semantic_query_a017e521cc5dd5d9": {
+      "section_id": "doc_pumpkin_book:page_0125",
+      "query_family_id": "semantic_family_f5bd66610aa579ea"
+    },
+    "semantic_query_105d89571a886cc9": {
+      "section_id": "doc_pumpkin_book:page_0126",
+      "query_family_id": "semantic_family_84d62f8a071fad6e"
+    },
+    "semantic_query_54fcffa60885c33a": {
+      "section_id": "doc_pumpkin_book:page_0128",
+      "query_family_id": "semantic_family_37c3e05ab6707120"
+    }
+  },
+  "candidate_split_counts": {
+    "train": 64,
+    "dev": 16,
+    "test": 20
+  },
+  "candidate_query_ids": [
+    "legacy_qa_38517c538f",
+    "legacy_qa_3a395136a2",
+    "legacy_qa_e29fc6df11",
+    "legacy_qa_dc932f6a3b",
+    "legacy_qa_a7eabc0b45",
+    "legacy_qa_5774a366ad",
+    "legacy_qa_24577f5780",
+    "legacy_qa_68bb2b4bfb",
+    "legacy_qa_b7bd4b7146",
+    "legacy_qa_5fba2ff9d7",
+    "legacy_qa_b4c6133fc0",
+    "legacy_qa_83b503f142",
+    "legacy_qa_ffa5552448",
+    "legacy_qa_19750186ec",
+    "legacy_qa_e05e31ee35",
+    "legacy_qa_6fbcfe338d",
+    "legacy_qa_f802c7bd65",
+    "legacy_qa_6dd0f81eca",
+    "legacy_qa_f1d5917078",
+    "legacy_qa_6002b61d38",
+    "legacy_qa_872e64b801",
+    "legacy_qa_dbcc4acf8d",
+    "legacy_qa_d0736dee64",
+    "legacy_qa_255ed8d2f4",
+    "legacy_qa_24bd9e9cb8",
+    "legacy_qa_de91cf6387",
+    "legacy_qa_9bbae622b0",
+    "legacy_qa_8732424215",
+    "legacy_qa_a6c49b61d8",
+    "legacy_qa_5ca3d5d6ca",
+    "legacy_qa_c65e297250",
+    "legacy_qa_ce5537f135",
+    "legacy_qa_eb7371a4ef",
+    "legacy_qa_fb98943c8f",
+    "legacy_qa_c0a28761c8",
+    "legacy_qa_a7cbff0703",
+    "legacy_qa_ca3f81eecb",
+    "legacy_qa_db80ecdb4e",
+    "legacy_qa_e5217bda73",
+    "legacy_qa_d9cc10f9b6",
+    "legacy_qa_59d998a0cb",
+    "legacy_qa_33bbefe596",
+    "legacy_qa_7ff77fd655",
+    "legacy_qa_1b550ce8d4",
+    "legacy_qa_13c16b95f8",
+    "legacy_qa_bfab223d39",
+    "legacy_qa_8832ae24a7",
+    "legacy_qa_b881ae3cfe",
+    "legacy_qa_33fd3767ac",
+    "legacy_qa_71abf7e741",
+    "legacy_qa_ebf36bc5a5",
+    "legacy_qa_ece5b9b3f8",
+    "legacy_qa_ad3b53b843",
+    "legacy_qa_897586532f",
+    "legacy_qa_fff14aff16",
+    "legacy_qa_02d4a80fb4",
+    "legacy_qa_6900047c29",
+    "legacy_qa_e99f64a5c8",
+    "legacy_qa_9a23006020",
+    "legacy_qa_c995273d13",
+    "legacy_qa_9dc2b79bc0",
+    "legacy_qa_4d60d50fb7",
+    "legacy_qa_d26bda36dc",
+    "legacy_qa_574aae21e6",
+    "legacy_qa_97cb3e55b8",
+    "legacy_qa_5dccb34271",
+    "legacy_qa_7361f5cc54",
+    "legacy_qa_fd04c067b2",
+    "legacy_qa_7619c2bcb8",
+    "legacy_qa_a93747039b",
+    "legacy_qa_64cb3b6577",
+    "legacy_qa_e022c449cc",
+    "legacy_qa_190aa4e486",
+    "legacy_qa_4fbd5d1dbf",
+    "legacy_qa_dca66486c5",
+    "legacy_qa_4fbd175727",
+    "legacy_qa_1412308980",
+    "legacy_qa_7a503e36f1",
+    "legacy_qa_fe8cef6ce6",
+    "legacy_qa_427b4dcd01",
+    "legacy_qa_4e4c0bfb20",
+    "legacy_qa_feb335fc41",
+    "legacy_qa_7c2e02bfa8",
+    "legacy_qa_527c09aef4",
+    "legacy_qa_0a786ac176",
+    "legacy_qa_bc0fef55cc",
+    "legacy_qa_de4e67e186",
+    "legacy_qa_f75ed7fe73",
+    "legacy_qa_c80ced82e0",
+    "legacy_qa_9d2b34c748",
+    "legacy_qa_50463c21c6",
+    "legacy_qa_50c5d07dfa",
+    "legacy_qa_cae445da70",
+    "legacy_qa_ab4a2534ea",
+    "legacy_qa_8213313899",
+    "legacy_qa_0486a666a1",
+    "legacy_qa_58c9a8bbf6",
+    "legacy_qa_f6d598e2ba",
+    "legacy_qa_c3d3a5b9c6",
+    "legacy_qa_105343ca89"
+  ],
+  "regression_query_ids": [
+    "model_evaluation_purpose",
+    "cross_validation_reliability",
+    "ensemble_learning_definition",
+    "slater_strong_duality",
+    "overfitting_underfitting",
+    "descent_direction",
+    "algorithm_and_model",
+    "hyperparameter_vs_parameter",
+    "continuous_attribute_split_points",
+    "decision_tree_stop_conditions",
+    "newton_hessian_cost",
+    "svm_kernel_evidence",
+    "lda_generalized_eigenvalue",
+    "newton_methods_comparison",
+    "business_model_selection",
+    "lda_multihop",
+    "lda_recursive_derivation",
+    "book_evidence_boundary",
+    "model_evaluation_followup",
+    "continuous_label_task",
+    "model_evaluation_and_macro_micro",
+    "roc_incremental_points",
+    "lda_goal_and_eigenvector",
+    "restricted_page_access",
+    "sample_space_feature_engineering",
+    "model_selection_no_absolute_best",
+    "model_selection_with_intro_scope",
+    "accuracy_vs_error_rate",
+    "f1_harmonic_mean",
+    "logistic_regression_threshold",
+    "svm_soft_margin_alpha_bounds",
+    "semi_supervised_learning_types",
+    "rule_learning_interpretability",
+    "bellman_value_function",
+    "svm_margin_generalization",
+    "linear_regression_global_optimum",
+    "random_forest_feature_sampling",
+    "perceptron_linear_separable",
+    "gaussian_mean_estimate",
+    "book_evidence_mnist",
+    "roc_threshold_process",
+    "gmm_em_cluster_assignment",
+    "macro_micro_imbalance",
+    "pca_projection_objective",
+    "lasso_sparse_solution",
+    "version_space_definition",
+    "vc_dimension_generalization_bound",
+    "feature_selection_reuse_context",
+    "cost_sensitive_error_components",
+    "dbscan_scope_filter",
+    "gmm_em_adjacent_derivation",
+    "lda_derivation_recursive_steps",
+    "bellman_with_reinforcement_scope",
+    "hyde_cv_reliability",
+    "contextual_model_eval_scope",
+    "contextual_cv_three_methods",
+    "auto_recursive_cv_logic",
+    "self_rag_generalization",
+    "agentic_svm_duality",
+    "agentic_mds_ksvd",
+    "agentic_kpca_centering",
+    "hyde_gini_impurity",
+    "self_rag_cost_threshold",
+    "auto_recursive_belief_topic",
+    "agentic_random_forest",
+    "linear_regression_closed_form_vectorization",
+    "belief_propagation_two_passes",
+    "gmm_parameter_update_context",
+    "gibbs_mh_acceptance_context",
+    "late_chunking_model_evaluation_methods"
+  ],
+  "frozen_test_query_ids": [
+    "legacy_qa_4e4c0bfb20",
+    "legacy_qa_feb335fc41",
+    "legacy_qa_7c2e02bfa8",
+    "legacy_qa_527c09aef4",
+    "legacy_qa_0a786ac176",
+    "legacy_qa_bc0fef55cc",
+    "legacy_qa_de4e67e186",
+    "legacy_qa_f75ed7fe73",
+    "legacy_qa_c80ced82e0",
+    "legacy_qa_9d2b34c748",
+    "legacy_qa_50463c21c6",
+    "legacy_qa_50c5d07dfa",
+    "legacy_qa_cae445da70",
+    "legacy_qa_ab4a2534ea",
+    "legacy_qa_8213313899",
+    "legacy_qa_0486a666a1",
+    "legacy_qa_58c9a8bbf6",
+    "legacy_qa_f6d598e2ba",
+    "legacy_qa_c3d3a5b9c6",
+    "legacy_qa_105343ca89"
+  ]
+}

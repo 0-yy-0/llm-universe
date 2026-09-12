@@ -1,0 +1,447 @@
+{
+  "schema_version": 1,
+  "review_method": "independent_model_review",
+  "human_verified": false,
+  "rejections": [
+    {
+      "candidate_id": "semantic_candidate_4269f6a2fdea37d8",
+      "reason": "问题依赖无锚点指代，证据片段也不足以独立作答"
+    },
+    {
+      "candidate_id": "semantic_candidate_d7138a319448d371",
+      "reason": "求导与极值结论和证据不一致"
+    },
+    {
+      "candidate_id": "semantic_candidate_3af623068be5efa2",
+      "reason": "问题未说明推导对象和符号"
+    },
+    {
+      "candidate_id": "semantic_candidate_d12ab9c05a0bf15a",
+      "reason": "问题直接依赖 chunk 上下文"
+    },
+    {
+      "candidate_id": "semantic_candidate_cfc33723f6054071",
+      "reason": "答案没有给出问题要求的 RIP 范围"
+    },
+    {
+      "candidate_id": "semantic_candidate_a6cd63067612aade",
+      "reason": "组合数 OCR 导致数学关系误读"
+    },
+    {
+      "candidate_id": "semantic_candidate_c44edbcaeaaed34d",
+      "reason": "混淆组合恒等式与增长函数上界"
+    },
+    {
+      "candidate_id": "semantic_candidate_8be821ea85b9ae90",
+      "reason": "问题使用无公式锚点的该式"
+    },
+    {
+      "candidate_id": "semantic_candidate_7aef5d725602911b",
+      "reason": "答案加入证据不存在的后验概率因子"
+    },
+    {
+      "candidate_id": "semantic_candidate_467ef85495ec0d9d",
+      "reason": "答案未说明如何由已标记标签计算未标记标签"
+    },
+    {
+      "candidate_id": "semantic_candidate_cf28fd8f7dc14b7f",
+      "reason": "条件概率公式转写错误"
+    },
+    {
+      "candidate_id": "semantic_candidate_e69aeeb743ae020c",
+      "reason": "问题使用无公式锚点的该式和这里"
+    },
+    {
+      "candidate_id": "semantic_candidate_1334811fcf06dfcc",
+      "reason": "答案只给稳态条件，没有回答采样过程"
+    },
+    {
+      "candidate_id": "semantic_candidate_4ff7b0afd4388bbe",
+      "reason": "答案循环复述问题，没有解释机制"
+    },
+    {
+      "candidate_id": "semantic_candidate_73d986dc951d4188",
+      "reason": "答案后半超出被截断的 positive chunk"
+    },
+    {
+      "candidate_id": "semantic_candidate_36e0950837f0de0a",
+      "reason": "将三折示例表述为交叉验证的一般定义"
+    },
+    {
+      "candidate_id": "semantic_candidate_27bbe5ae9c8b4d22",
+      "reason": "交叉验证概念与参数配置选择语义错位"
+    },
+    {
+      "candidate_id": "semantic_candidate_a07bc703e84a73b3",
+      "reason": "把全部预测为正例的特殊情形当作查全率通用算法"
+    },
+    {
+      "candidate_id": "semantic_candidate_917034a29e368cff",
+      "reason": "F1 公式分母误加平方"
+    },
+    {
+      "candidate_id": "semantic_candidate_4da6512dfa15a7e7",
+      "reason": "错误声称 micro-F1 与 macro-F1 计算相同"
+    },
+    {
+      "candidate_id": "semantic_candidate_c2149a6ade9d9c1d",
+      "reason": "问题缺少公式锚点且答案过于空泛"
+    },
+    {
+      "candidate_id": "semantic_candidate_95dba8c36aed9fa0",
+      "reason": "与另一条 CART 构建问法语义重复且证据较弱"
+    },
+    {
+      "candidate_id": "semantic_candidate_48e0ef219767f9bf",
+      "reason": "把拉格朗日函数误作对偶函数并遗漏下确界"
+    },
+    {
+      "candidate_id": "semantic_candidate_1cb295861406af4a",
+      "reason": "问题无具体不等式锚点且答案无实质内容"
+    },
+    {
+      "candidate_id": "semantic_candidate_af640754dc069206",
+      "reason": "答案仅同义复述类比关系，没有给出推导内容"
+    },
+    {
+      "candidate_id": "semantic_candidate_40c0f96ac248d82e",
+      "reason": "positive 只有出版社与年份，不能确认文本身份"
+    },
+    {
+      "candidate_id": "semantic_candidate_0b27373f6b38bb03",
+      "reason": "问题无公式锚点且答案未给出明确优化目标"
+    },
+    {
+      "candidate_id": "semantic_candidate_2a131118d3f8f34b",
+      "reason": "问题无公式锚点且答案超出 positive"
+    },
+    {
+      "candidate_id": "semantic_candidate_3e4958bf0116ddd0",
+      "reason": "后验概率归一化公式转写错误"
+    },
+    {
+      "candidate_id": "semantic_candidate_d6e14fbcb6aaebb5",
+      "reason": "答案只说代入上式，没有给出表达式或结果"
+    },
+    {
+      "candidate_id": "semantic_candidate_856b29f8a34b01cd",
+      "reason": "positive 在第117页固定 chunk 截断于“因为协方”，第118页才完成理由，无法在页内且384-token契约下形成完整 why 证据"
+    },
+    {
+      "candidate_id": "semantic_candidate_5ea5d38b1cf210d6",
+      "reason": "第135页公式中的 wi 分母关系错误，问题答案无法由证据正确支持"
+    },
+    {
+      "candidate_id": "semantic_candidate_2950fa4de233fa9f",
+      "reason": "第179页 OCR 公式与语义不一致，无法可靠支持初始状态概率解释"
+    },
+    {
+      "candidate_id": "semantic_candidate_fbb0b9b58f86bc73",
+      "reason": "第62页凸优化定义中的等式约束条件存在代数/语义错误"
+    },
+    {
+      "candidate_id": "semantic_candidate_535b073822b06b56",
+      "reason": "第91页从式(8.6)到式(8.7)的代数推导错误"
+    },
+    {
+      "candidate_id": "semantic_candidate_96b8272da73d9ce3",
+      "reason": "第103页将误差-分歧分解中的 E 解释为错误对象，答案与原文不符"
+    },
+    {
+      "candidate_id": "semantic_candidate_b0664c9ec6ee66a2",
+      "reason": "第111页证据仅列术语，未提供比雪夫距离的定义或支持性解释"
+    },
+    {
+      "candidate_id": "semantic_candidate_179b198048771f1b",
+      "reason": "第113页证据中的 αi 片段不能支持题目所称的混合成分选择 claim"
+    },
+    {
+      "candidate_id": "semantic_candidate_1ec5cfb1a2c296c7",
+      "reason": "第118页把 DBSCAN 距离 claim 归为测地线，原文仅称类似且明确不相同"
+    },
+    {
+      "candidate_id": "semantic_candidate_1efa373d70ad16d3",
+      "reason": "第137页只能支持距离增大时权重减小，不能支持成反比这一过强结论"
+    },
+    {
+      "candidate_id": "semantic_candidate_b9418c9748ba7c2f",
+      "reason": "第136页 OCR 含 U+FFFF 字符，公式无法可靠解析或审核"
+    },
+    {
+      "candidate_id": "semantic_candidate_54760f75725e3620",
+      "reason": "第48页 OCR 含 U+FFFF 字符，信息增益公式无法可靠解析或审核"
+    },
+    {
+      "candidate_id": "semantic_candidate_5c9ffa7dcb4c5b65",
+      "reason": "第89页 OCR 含 U+FFFF 字符，二项分布推导无法可靠解析或审核"
+    },
+    {
+      "candidate_id": "semantic_candidate_cd7b6d0a170df43b",
+      "reason": "第117页 OCR 含 U+FFFF 字符，公式(9.38)推导无法可靠解析或审核"
+    },
+    {
+      "candidate_id": "semantic_candidate_b193f64c3d44f0ae",
+      "reason": "第126页 OCR 含 U+FFFF 字符，MDS 特征值分解公式无法可靠解析或审核"
+    },
+    {
+      "candidate_id": "semantic_candidate_678e889ed60152fd",
+      "reason": "将 w=Zα 的式(10.22)误说成仅令 K=ZᵀZ 即可得到式(10.24)，遗漏式(10.21)特征方程"
+    },
+    {
+      "candidate_id": "semantic_candidate_4350bba06c81b0e6",
+      "reason": "claim 声称留一法确保预测准确性，positive 明确区分预测正确与错误，无法支持该保证"
+    },
+    {
+      "candidate_id": "semantic_candidate_ef978ca7c89ecccc",
+      "reason": "熵公式答案在完整类别求和之外又多乘 |Y|，数学转写错误"
+    },
+    {
+      "candidate_id": "semantic_candidate_e49dafc034d2d276",
+      "reason": "把步长1/L保证下降泛化到任意函数，遗漏 L-光滑及 L 含义等必要条件"
+    },
+    {
+      "candidate_id": "semantic_candidate_7e66ad3338195887",
+      "reason": "问题未定义 E_k，截断 positive 也没有说明只保留最大奇异值所对应的秩1近似目标"
+    },
+    {
+      "candidate_id": "semantic_candidate_7fa2fd0046ab27be",
+      "reason": "问题未指明定理，把引理12.2的归纳起始情形答成一般数学归纳法成立条件"
+    },
+    {
+      "candidate_id": "semantic_candidate_71755d8f47c6ff4e",
+      "reason": "答案称泛化界只与样本数 m 有关，遗漏同一公式中的 VC 维 d 和置信参数 δ"
+    },
+    {
+      "candidate_id": "semantic_candidate_42aa54b3f6d6f1f2",
+      "reason": "positive 截断在“存在一个 h 使得”，缺少假设需要满足的关键结论"
+    },
+    {
+      "candidate_id": "semantic_candidate_c34394f8aaeb557c",
+      "reason": "positive 只有跨 chunk 句尾，缺少病态损失函数这一条件，不能支持宽泛的经验损失与经验误差关系问题"
+    },
+    {
+      "candidate_id": "semantic_candidate_aefe9ef4ca41c45a",
+      "reason": "边缘化问题未指定公式或模型，答案依赖未在问题中定义的 Θ 与 N"
+    },
+    {
+      "candidate_id": "semantic_candidate_32d290b3ecd847fb",
+      "reason": "遗漏“每个类别对应一个高斯混合成分”的关键前提，把特定模型结论泛化到任意混合模型"
+    },
+    {
+      "candidate_id": "semantic_candidate_2c1cd384a3a07854",
+      "reason": "混淆计算偏导数与将偏导数置零后求驻点参数 Σi"
+    },
+    {
+      "candidate_id": "semantic_candidate_a8d1165a9609ead5",
+      "reason": "问题未说明模型或目标函数，positive 又从“拉格朗日”一词中部开始，无法独立定位推导对象"
+    },
+    {
+      "candidate_id": "semantic_candidate_bd7a96adf5fdb4d2",
+      "reason": "答案把求导变量 αi 错写为推导过程中视为常量，和原文“重点注意变量是 αi”矛盾"
+    },
+    {
+      "candidate_id": "semantic_candidate_8e63ff65be1b89c1",
+      "reason": "把分式的分子分母平铺成两个乘数并声称其乘积为1，数学关系转写错误"
+    },
+    {
+      "candidate_id": "semantic_candidate_31f52262a8e2e96a",
+      "reason": "positive 只保留式(13.8)前一公式的残缺尾部，不能支持完整推导问题"
+    },
+    {
+      "candidate_id": "semantic_candidate_9ca5fc405afaa52e",
+      "reason": "claim 声称能量越小表示模型拟合越好，positive 只支持相似样本的预测差更小"
+    },
+    {
+      "candidate_id": "semantic_candidate_9a2eb5b3e6ac0311",
+      "reason": "把协同训练双视图伪标签步骤错误归入半监督聚类算法"
+    },
+    {
+      "candidate_id": "semantic_candidate_b53a744e53c52220",
+      "reason": "问题只引用第6至10行，未给出图13.9或算法名称，不能独立作答"
+    },
+    {
+      "candidate_id": "semantic_candidate_0f6c9fe4802106e7",
+      "reason": "问题要求条件独立性证明，但答案只循环复述式(14.7)成立，没有给出因子化论证"
+    },
+    {
+      "candidate_id": "semantic_candidate_0d7acc6e2ab26e71",
+      "reason": "把图14.7(a)中四条边各成一团的特例泛化为任意无向图都分成四个团"
+    },
+    {
+      "candidate_id": "semantic_candidate_e6592f1df384f49b",
+      "reason": "期望公式答案漏掉 f(xj) 与除以 N，并错误表述为采样数量乘概率密度"
+    },
+    {
+      "candidate_id": "semantic_candidate_55fdd97f32190f14",
+      "reason": "问题询问如何数值化，positive 与答案只重复需要数值化并转引其他章节，没有实际方法"
+    },
+    {
+      "candidate_id": "semantic_candidate_011a245c4aea3a5a",
+      "reason": "把示例中 fb 的预测更好归因为规则更简单，positive 只支持其预测符合当前真实标记"
+    },
+    {
+      "candidate_id": "semantic_candidate_7e88ccc5ce363e39",
+      "reason": "最佳阈值问题未指定代价曲线或优化目标，截头 positive 也缺少作垂线的前件"
+    },
+    {
+      "candidate_id": "semantic_candidate_8c448263a2c91f05",
+      "reason": "称二项似然关于错误率为凹函数并用导数为零概括边界情形，数学结论不成立"
+    },
+    {
+      "candidate_id": "semantic_candidate_a7a7a36a84eee135",
+      "reason": "问题中的 C 未指定方程，positive 自身也从等式中部开始"
+    },
+    {
+      "candidate_id": "semantic_candidate_fb08bda8bcc15fe5",
+      "reason": "把注解作者的“暂且理解”改写为《西瓜书》的正式定义，丢失来源和不确定性限定"
+    },
+    {
+      "candidate_id": "semantic_candidate_997b86e7f2ec9b36",
+      "reason": "把 2E_D[(f−f̄)y_D] 错写为 E_D²[f−f̄·y_D]，系数、平方与括号关系均改变"
+    },
+    {
+      "candidate_id": "semantic_candidate_4995879cf1bef1c0",
+      "reason": "答案把平方偏差 (f̄−y)² 错写成 f̄−y²，并引入未定义的 h"
+    },
+    {
+      "candidate_id": "semantic_candidate_89d36fc2de14a8c1",
+      "reason": "未说明 E_w 所属模型、损失或公式，无法确定求导对象"
+    },
+    {
+      "candidate_id": "semantic_candidate_5043bb822006d057",
+      "reason": "仅由 a∇fᵀd<0 不能保证任意步长后的函数值下降，答案遗漏步长约束"
+    },
+    {
+      "candidate_id": "semantic_candidate_8d05c383a79f37a1",
+      "reason": "把特定式(3.29)应用牛顿法的说明误答成通用牛顿迭代公式的来源，形成循环解释"
+    },
+    {
+      "candidate_id": "semantic_candidate_64450c4037325859",
+      "reason": "未说明对数几率回归损失及所求参数，泛称误差偏导无法独立定位对象"
+    },
+    {
+      "candidate_id": "semantic_candidate_486f51fd1653a218",
+      "reason": "询问 LDA 一般流程，但 positive 仅留下第一步训练 y=wᵀx，无法支持完整流程"
+    },
+    {
+      "candidate_id": "semantic_candidate_88687881da1605b4",
+      "reason": "问题未给出 LDA 或优化约束对象，γ=λ 的回答依赖被省略的关系"
+    },
+    {
+      "candidate_id": "semantic_candidate_de544c965cc8d4cb",
+      "reason": "通用海明距离回答混入“停用类别差异计0.5”的专门约定但未保留前提"
+    },
+    {
+      "candidate_id": "semantic_candidate_6d658a47efe4b376",
+      "reason": "CART划分 positive 截在单属性目标函数中部，缺少比较属性与递归划分，无法支持完整问题"
+    },
+    {
+      "candidate_id": "semantic_candidate_c3270aa52ce2d6c3",
+      "reason": "把属性 a 的标量取值不超过 v 错写为样本向量 x≤v"
+    },
+    {
+      "candidate_id": "semantic_candidate_5d9e2732f4a955b4",
+      "reason": "含糖率分支的好瓜与坏瓜条件和 positive 相反"
+    },
+    {
+      "candidate_id": "semantic_candidate_49a0c268db92afae",
+      "reason": "问题询问式(5.14)，答案却给出前一式的 Δv，正确对象应为 Δγ"
+    },
+    {
+      "candidate_id": "semantic_candidate_6003a64740d07696",
+      "reason": "把 RBF 网络输出错当作 q 维隐藏特征，遗漏输出是这些特征的线性组合"
+    },
+    {
+      "candidate_id": "semantic_candidate_63dbd20c6c774038",
+      "reason": "把总能量 E_graph 与其两项 E_edges、E_nodes 并列为三个组成部分"
+    },
+    {
+      "candidate_id": "semantic_candidate_a31cb23e5f855e25",
+      "reason": "将给定隐层后可见变量独立泛化到一般模型，遗漏 RBM 的受限连接结构前提"
+    },
+    {
+      "candidate_id": "semantic_candidate_73c63d01d68c702c",
+      "reason": "把核矩阵条目由 κ 表示错说成矩阵乘法中的一般元素关系"
+    },
+    {
+      "candidate_id": "semantic_candidate_ef5c882b3af643d1",
+      "reason": "将 φ(x)φ(x)ᵀ 的外积错误表述为向量与自身的点积"
+    },
+    {
+      "candidate_id": "semantic_candidate_0459bbb6f3029ba9",
+      "reason": "后验期望估计 positive 截在后验公式之前，答案只循环说使用后验期望"
+    },
+    {
+      "candidate_id": "semantic_candidate_37501378b7e56497",
+      "reason": "把 EM 后验加权的完整数据对数项当作一般联合对数似然，并颠倒条件概率与联合概率的角色"
+    },
+    {
+      "candidate_id": "semantic_candidate_17afd7735984812d",
+      "reason": "声称指数损失总随 |H(x)| 增大而减小，遗漏仅在分类正确时成立的条件"
+    },
+    {
+      "candidate_id": "semantic_candidate_c737e5b9fc08516e",
+      "reason": "问题要求式(8.6)完整推导，positive 截于关键偏导中部且没有推导结果"
+    },
+    {
+      "candidate_id": "semantic_candidate_b8e644f5148c2b1b",
+      "reason": "把 argmax 返回使函数最大的自变量错说成返回函数最大值"
+    },
+    {
+      "candidate_id": "semantic_candidate_15ee7816838529f9",
+      "reason": "将不在某个基学习器 bootstrap 训练集 D_t 的包外样本错说成不在整个训练集"
+    },
+    {
+      "candidate_id": "semantic_candidate_33e75492dc566148",
+      "reason": "把分歧或误差乘 p(x) 后积分求期望错说成对条件概率分布本身积分"
+    },
+    {
+      "candidate_id": "semantic_candidate_1d3e9e08b5da13af",
+      "reason": "把回归任务可选平方损失的例子泛化为迭代过程的通用损失定义"
+    },
+    {
+      "candidate_id": "semantic_candidate_3ae821a80049686f",
+      "reason": "问题只询问“第4步”但未指定算法或伪代码，不能独立作答"
+    },
+    {
+      "candidate_id": "semantic_candidate_82360629b0742460",
+      "reason": "把两种聚类下的同簇样本对集合改写为普通样本集合，评价对象发生变化"
+    },
+    {
+      "candidate_id": "semantic_candidate_c70f01615bb7d018",
+      "reason": "把 Rand 指数的聚类结果一致性含义错误移给簇内距离"
+    },
+    {
+      "candidate_id": "semantic_candidate_86f7a13842e91c43",
+      "reason": "问题询问样本如何归簇，答案却只给参数拟合迭代，遗漏 γ 行最大值归属判据"
+    },
+    {
+      "candidate_id": "semantic_candidate_d8a037ac3cac0cc7",
+      "reason": "把式(9.35)协方差推导标题之前的均值 μ 求和步骤错配给式(9.35)"
+    },
+    {
+      "candidate_id": "semantic_candidate_894e7feb8bad4575",
+      "reason": "概率密度求导问题未给分布、表达式或求导参数，无法确定矩阵微分对象"
+    },
+    {
+      "candidate_id": "semantic_candidate_282566f558e91715",
+      "reason": "式(9.38)推导 positive 截于混合成分求和中部，缺 λ=−m 与归一化结果"
+    },
+    {
+      "candidate_id": "semantic_candidate_a2f2bd0758b8d14d",
+      "reason": "把路径符号 p1,…,pn 的截断 OCR 误读为未定义 PN，并混合不同密度关系条件"
+    },
+    {
+      "candidate_id": "semantic_candidate_c60386521586f0ba",
+      "reason": "把 MDS 在精确保距离设定下的目标泛化为所有降维方法的目标"
+    },
+    {
+      "candidate_id": "semantic_candidate_c3a5225123f71a34",
+      "reason": "询问如何由距离矩阵 D 得内积矩阵 B，但 positive 与答案只说可以得到并转引式(10.10)"
+    },
+    {
+      "candidate_id": "semantic_candidate_90aa4ec82a3a14e4",
+      "reason": "把 MDS 精确保距离情形的非零特征值数量错写为一般降维维度 d′ 的定义"
+    }
+  ]
+}

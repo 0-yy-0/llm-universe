@@ -167,15 +167,5 @@ cython_debug/
 *.sqlite
 
 **/.env
+.worktrees/
 .worktrees/.env
-
-# C7 6.增强阶段 运行产物
-notebook/C7 高级 RAG 技巧/6. 增强阶段/chroma_db/
-notebook/C7 高级 RAG 技巧/6. 增强阶段/models/
-notebook/C7 高级 RAG 技巧/6. 增强阶段/context_enhance_compare_*.csv
-notebook/C7 高级 RAG 技巧/6. 增强阶段/context_enhance_compare_*.json
-notebook/C7 高级 RAG 技巧/6. 增强阶段/context_enhance_eval_summary.json
-notebook/C7 高级 RAG 技巧/6. 增强阶段/eval*.txt
-notebook/C7 高级 RAG 技巧/6. 增强阶段/eval*.json
-notebook/C7 高级 RAG 技巧/6. 增强阶段/.DS_Store
-

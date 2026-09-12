@@ -1,8 +1,0 @@
-method,mean,total,wins,regressions,ties
-baseline,1.235,21,0,0,17
-iterative,1.353,23,4,2,11
-recursive,1.294,22,4,3,10
-routing,1.176,20,3,4,10
-adaptive,1.471,25,5,1,11
-crag,1.294,22,2,1,14
-self_rag,1.529,26,6,1,10

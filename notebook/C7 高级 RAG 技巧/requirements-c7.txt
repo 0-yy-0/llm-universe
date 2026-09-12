@@ -1,0 +1,28 @@
+# C7 教程与 C2 query→evidence 实验的固定依赖（Python 3.10）。
+# 运行时只使用本地已安装的这些依赖；缺失时直接失败，不切换实现。
+pymupdf==1.26.5
+rank-bm25==0.2.2
+
+# 读取 DOCX/PPTX fixture：
+python-docx==1.2.0
+python-pptx==1.0.2
+
+# C7 生成阶段可选 Cross-Encoder 的实际顶层导入；与 C5 README 约定一致。
+modelscope==1.33.0
+langchain==0.3.27
+langchain-community==0.3.30
+langchain-core==0.3.76
+
+# 向量库 Notebook 使用的固定版本；不要与仓库其他环境混装：
+numpy==1.26.4
+chromadb==1.5.5
+sentence-transformers==5.2.0
+torch==2.2.2
+transformers==4.57.3
+
+# Notebook 运行：
+nbconvert==7.17.0
+nbformat==5.10.4
+ipykernel==6.30.1
+python-dotenv==1.1.1
+zhipuai==2.1.5.20250825

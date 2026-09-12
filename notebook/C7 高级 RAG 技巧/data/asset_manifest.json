@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "source_of_truth": "canonical_dataset",
+  "assets": {
+    "pdf": {
+      "path": "data/pumpkin_book.pdf",
+      "sha256": "371e426890ae8246bca319e433b1d54d0610f015de42df8385cd8eeb610225b1",
+      "source": "Datawhale pumpkin-book v1.9.9",
+      "license": "CC BY-NC-SA 4.0",
+      "verified": true
+    },
+    "vector_store": {
+      "path": "data/向量库/南瓜书配套库",
+      "required_files": [
+        "chroma.sqlite3",
+        "b9d257ba-33e8-44b5-a7a7-bc2fdf2a2bf6/data_level0.bin",
+        "b9d257ba-33e8-44b5-a7a7-bc2fdf2a2bf6/header.bin",
+        "b9d257ba-33e8-44b5-a7a7-bc2fdf2a2bf6/length.bin",
+        "b9d257ba-33e8-44b5-a7a7-bc2fdf2a2bf6/link_lists.bin"
+      ],
+      "collection_name": "nb_ctx",
+      "dimension": 512,
+      "record_count": 987,
+      "model": "BAAI/bge-small-zh-v1.5",
+      "normalized_embeddings": true,
+      "chunk": {
+        "strategy": "RecursiveCharacterTextSplitter",
+        "size": 256,
+        "overlap": 20
+      },
+      "verified_facts": [
+        "SQLite collection name/dimension/record count",
+        "required vector index files exist"
+      ],
+      "source": "Vectors derived from data/pumpkin_book.pdf",
+      "license": "CC BY-NC-SA 4.0 inherited from source PDF"
+    },
+    "canonical_dataset": {
+      "path": "data/dataset",
+      "manifest": "data/dataset/manifest.json",
+      "required_files": [
+        "manifest.json",
+        "documents.jsonl",
+        "evidence.jsonl",
+        "queries.jsonl",
+        "qrels.jsonl",
+        "sessions.jsonl",
+        "splits.json",
+        "annotations/qa_candidates.jsonl",
+        "annotations/review_decisions.jsonl",
+        "annotations/method_cases.json",
+        "finetune_pairs.jsonl"
+      ],
+      "loader": "common/dataset.py",
+      "source": "C7 canonical dataset package",
+      "license": "Each document record declares its own source and license"
+    },
+    "multisource_sources": {
+      "required_files": [
+        "data/dataset/manifest.json",
+        "2. 数据处理/README.md",
+        "7. 评估/README.md"
+      ],
+      "source_of_truth": "current_repository_files",
+      "source_scope": "C7 training and evaluation loop; every quote is read from the declared file",
+      "files": [
+        {
+          "path": "data/dataset/manifest.json",
+          "source_id": "canonical_dataset_manifest",
+          "source_type": "canonical dataset manifest",
+          "purpose": "dataset schema, split counts and evaluation boundary",
+          "sha256": "0c227ab607258cdfbcc3aa647c3e5410f6efcec108897729317939e5eea992c6"
+        },
+        {
+          "path": "2. 数据处理/README.md",
+          "source_id": "data_processing_readme",
+          "source_type": "C7 data-processing guide",
+          "purpose": "training data construction, MNRL choice and frozen-test protocol",
+          "sha256": "c68570b70a63bc1a5b8dc8e172d8d3149f217c428b9b4c692f29d29438fc2f3f"
+        },
+        {
+          "path": "7. 评估/README.md",
+          "source_id": "evaluation_readme",
+          "source_type": "C7 evaluation guide",
+          "purpose": "method-fit, regression guard and end-to-end evaluation scope",
+          "sha256": "4fdec106be63b0de0468b3d513599f4caaa394d4d75158a80776cec766fb422c"
+        }
+      ]
+    },
+    "complete_experiments": {
+      "required_notebooks": [
+        "2. 数据处理/什么时候需要微调向量模型.ipynb",
+        "3. 索引阶段/比较索引增强方法.ipynb",
+        "6. 处理信息缺口/构建多轮多来源助手.ipynb"
+      ],
+      "output_contract": "Each executable experiment retains real inputs, outputs, source scope and structured audit data"
+    }
+  }
+}
