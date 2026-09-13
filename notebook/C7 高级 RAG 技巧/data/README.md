@@ -18,7 +18,7 @@
 
 问题集的加载、引用完整性、空训练问题、重复 ID、训练正例水印和 split 泄漏由 `common/dataset.py` 与 `scripts/check_dataset.py` 检查。评估 Notebook 只能通过 canonical loader 读取这些记录；参考答案和 expected evidence 只用于结果检查，不能提前注入检索上下文。
 
-当前数据包包含 163 条 query→evidence pair：101 train、28 dev、34 frozen test，分别覆盖 55、14、17 个互不重叠的 PDF 页面。问题由 `glm-4-flash` 生成和初审，再经独立模型语义复核；保留记录的 `human_verified` 均为 `false`。这是有限的合成问法分布，教程结果不能外推为自然用户集覆盖。
+当前数据包包含 163 条 query→evidence pair：101 train、28 dev、34 frozen test，分别覆盖 55、14、17 个互不重叠的 PDF 页面。问题由 `glm-4-flash` 生成和初审，再由同一 `glm-4-flash` 发起另一次独立语义审核请求；保留记录的 `human_verified` 均为 `false`。这是有限的合成问法分布，教程结果不能外推为自然用户集覆盖，也不能把模型审核称为人工核验。
 
 ## 多来源 Notebook 的真实资料范围
 

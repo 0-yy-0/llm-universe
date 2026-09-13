@@ -20,7 +20,7 @@
 2. LLM 开发技巧。LLM 开发更进阶的技巧，包括但不限于：Prompt Engineering、多类型源数据的处理、优化检索、召回精排、Agent 框架等
 3. LLM 应用实例。引入一些成功的开源案例，从本课程的角度出发，解析这些应用范例的 Idea、核心思路、实现框架，帮助初学者明白其可以通过 LLM 开发什么样的应用。
 
-第一部分已完稿；第二部分的 C7 高级 RAG 技巧已提供七步学习路径、可运行 Notebook 与评估案例，可以从[课程入口](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/README.md)开始。第三部分持续补充应用解读。
+第一部分已完稿；第二部分的 C7 高级 RAG 技巧已提供七步学习路径、可运行 Notebook 与评估案例，可以从[默认分支上的课程入口](https://github.com/datawhalechina/llm-universe/blob/HEAD/notebook/C7%20高级%20RAG%20技巧/README.md)开始。在 GitHub 审查未合并分支时，使用[当前分支相对入口](../notebook/C7%20高级%20RAG%20技巧/README.md)；文档站点则使用前一个默认分支链接。第三部分持续补充应用解读。
 
 **目录结构说明：**
 
@@ -103,7 +103,16 @@ LLM 正逐步成为信息世界的新革命力量，其通过强大的自然语�
 
 ### 第二部分 进阶 RAG 技巧
 
-完整课程入口：[C7 高级 RAG 技巧](https://github.com/datawhalechina/llm-universe/blob/main/notebook/C7%20高级%20RAG%20技巧/README.md)。C7 的 Notebook 源文件位于仓库 `notebook/` 目录，以下入口在 GitHub 打开；本地运行环境与依赖以 C7 首页为准。
+完整课程入口：[C7 高级 RAG 技巧](../notebook/C7%20高级%20RAG%20技巧/README.md)。C7 不是基础 RAG 的替代品，开始前请先完成下面的补课；每个入口都对应现有 C2—C5 内容。
+
+| C7 先修目标 | 补课入口 | 完成标准 |
+| --- | --- | --- |
+| 能调用模型并写出受约束的 Prompt | [C2：使用 LLM API](C2/2.%20使用%20LLM%20API.md)、[Prompt Engineering](C2/3.%20Prompt%20Engineering.md) | 能区分用户问题、检索上下文和回答约束 |
+| 理解 Embedding、相似度和向量库 | [C3：词向量及向量知识库](C3/1.词向量及向量知识库介绍.md)、[使用 Embedding API](C3/2.使用%20Embedding%20API.md)、[搭建向量数据库](C3/4.搭建并使用向量数据库.md) | 能把一段资料编码、保存来源/页码，并取回 top-k 片段 |
+| 能跑通基础检索问答链 | [C4：构建检索问答链](C4/2.构建检索问答链.md) | 能说明“资料 → 分块 → 检索 → 上下文 → 回答”的边界 |
+| 会用基本检索指标复查改动 | [C5：评估应用](C5/1.%20如何评估%20LLM%20应用.md)、[优化检索部分](C5/3.评估并优化检索部分.md) | 能在固定问题上解释 Recall@k、MRR，并记录退化题 |
+
+C7 的学习顺序是“先修基础 RAG，再按问题选择高级方法”，不是把七章全部同时打开。Notebook 源文件位于仓库 `notebook/` 目录；本地运行环境与依赖以 C7 首页为准。
 
 负责人：高立业
 

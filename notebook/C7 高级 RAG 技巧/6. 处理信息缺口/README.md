@@ -29,19 +29,11 @@
 4. [检查检索结果后再继续](检查检索结果后再继续.ipynb)：包括 CRAG 和 Self-RAG 的补查判断。
 5. [Agentic RAG：用 Agent 编排多步检索](让系统决定怎样检索.ipynb)：实现受约束的 `Plan → Act → Observe → Reflect/Repair → Answer` 闭环，在关键词、向量和混合检索之间选择，保存逐步 trace，并根据实际证据判断是否补查。
 
-### 严格生成与本地 CRAG 资源
+### 运行边界与维护契约
 
-Agentic RAG Notebook 的 plan、verify、repair 响应必须分别满足精确字段、类型、数量和唯一性契约；`检查检索结果后再继续.ipynb` 的 Self-RAG reflection 也必须满足四字段契约。非法 JSON、字段缺失或多余、空字符串、重复查询和不一致的 sufficient 语义都会直接抛错。失败时应修复输入、提示词或响应契约；Notebook 不使用重试、备用模型、默认值或伪造结果。生成调用固定为项目根 `.env` 中的 `ZHIPUAI_API_KEY` 与字面量 `glm-4-flash`，不继承 shell 环境变量。
+本章的 Agentic RAG 和 Self-RAG 页面仍是严格契约示例：plan/verify/repair 及 reflection 的 JSON 必须满足字段、类型、数量、唯一性和证据绑定要求，非法响应直接失败，不使用重试、备用模型、默认答案或伪造结果。生成调用固定读取项目根 `.env` 的 `ZHIPUAI_API_KEY` 并使用字面量 `glm-4-flash`；Agentic 的 `answered`/`insufficient`、`claims` 和 `candidate_catalog` 仍按原文 evidence 绑定，修复后必须先 final verify。教程检查器只读取已保存结构，不执行 Notebook 或网络/API。
 
-Agentic RAG 的每个固定案例只保存一个最终 `answer`：`status=answered` 时 `claims` 必须非空，`status=insufficient` 时必须为 `claims=[]`。每条 claim 必须是 `{statement, evidence_ids, evidence}`：`evidence_ids` 为非空且不重复的候选 ID，`evidence` 逐项保存对应的 `evidence_id/page/quote`，并与最终 `candidate_catalog` 和 canonical 原文完全一致；固定 answerable 案例的 claims 合并引用还必须覆盖全部 essential qrels。repair 后必须先完成 final verify，才能生成最终答案。教程检查器只读取这些已保存结构，不执行 Notebook 或网络/API 调用。
-
-CRAG 的 `BAAI/bge-reranker-base` 只接受明确的本地 snapshot，运行时使用 `local_files_only=True`，缺少文件会报 `FileNotFoundError`。先按[教程首页](../README.md#运行准备)进入 C7 根目录并安装 `requirements-c7.txt`，再在同一目录、联网时准备一次本地 snapshot：
-
-```bash
-python -c "from modelscope import snapshot_download; print(snapshot_download('BAAI/bge-reranker-base'))"
-```
-
-上述最后一条命令是唯一的联网准备步骤；资源准备完成后，运行 CRAG 闭环只读取 `~/.cache/modelscope/hub/models/BAAI/bge-reranker-base`，不会联网或切换来源。若 snapshot 不存在，请先完成准备命令，不能让 Notebook 自动下载。
+CRAG 只读取明确的本地 `BAAI/bge-reranker-base` snapshot（`local_files_only=True`），缺少文件直接报 `FileNotFoundError`，不联网、不切换来源。需要准备时，在 C7 根目录联网执行一次 `python -c "from modelscope import snapshot_download; print(snapshot_download('BAAI/bge-reranker-base'))"`，之后只读本地缓存。维护者需要的完整字段、资产和发布检查见[维护说明](../docs/维护说明.md)；普通读者只需按本章各 Notebook 的运行准备完成对应实验。
 
 ## 对话和资料范围
 
@@ -62,5 +54,15 @@ Notebook 的 `conversation state` 只保留本会话最近三轮的原问题、�
 ## 怎样判断实验结果
 
 每个 Notebook 固定自己的问题、候选语料、检索预算和检查指标，记录补回了什么、增加多少检索，以及改善、持平、退化或不适用的结果。不同专题的范围不同，局部成功不能直接外推到整个资料库。需要同题索引比较时看 [C3 可选实验](../3.%20索引阶段/比较索引增强方法.ipynb)，需要复查一般问题时看[评估](../7.%20评估/README.md)。
+
+## 实践任务：做一次有界补查或澄清
+
+选一个自己的多条件问题，先运行一次基础检索并明确写出“已找到什么、还缺什么”。只允许进行一次有理由的补查（或在历史不足、指代不明时先澄清），再把两轮结果按稳定 ID 合并；不要把多轮调用当作必然提升。
+
+### 自检标准
+
+- trace 保存原问题、缺口判断、补查 query、每轮的 `source/page/quote` 和停止理由；补查不能只是重复原 query。
+- 最终回答的每条 claim 都绑定真实 evidence；没有足够证据时状态为 `insufficient`/`clarify`，不补写外部知识。
+- 能指出本次流程增加的检索次数和成本，并用一个原本可回答的问题做回归检查；任一项缺失就退回第 7 章补记录。
 
 [返回教程首页](../README.md)
