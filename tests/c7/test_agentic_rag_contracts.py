@@ -22,7 +22,7 @@ COURSE = ROOT / "notebook" / "C7 高级 RAG 技巧"
 NOTEBOOK = COURSE / "6. 处理信息缺口" / "让系统决定怎样检索.ipynb"
 QUERIES = COURSE / "data" / "dataset" / "queries.jsonl"
 AUDIT_MIME = "application/vnd.llm-universe.tutorial-audit+json"
-CASE_IDS = {"agentic_mds_ksvd", "agentic_kpca_centering"}
+CASE_IDS = {"agentic_mds_ksvd", "agentic_kpca_centering", "lda_goal_and_eigenvector"}
 ANSWER_ALIASES = {
     "answer_check",
     "agentic_answer",
@@ -179,6 +179,24 @@ def _stage_parsed(audit: dict, *names: str) -> dict | None:
     return None
 
 
+def _stage_effective(audit: dict, *names: str) -> dict | None:
+    """Read deterministic verify adjudication, with compatibility for old audits."""
+
+    outputs = audit.get("model_outputs")
+    if not isinstance(outputs, dict):
+        return None
+    for name in names:
+        value = outputs.get(name)
+        if isinstance(value, dict):
+            effective = value.get("effective")
+            if isinstance(effective, dict):
+                return effective
+            parsed = value.get("parsed")
+            if isinstance(parsed, dict):
+                return parsed
+    return None
+
+
 def _final_answer(audit: dict) -> dict:
     """最终答案唯一从 ``model_outputs.answer`` 读取。"""
 
@@ -273,7 +291,7 @@ def _extract_agentic_parser() -> object:
     return _extract_pure_function("parse_agentic_verify")
 
 
-def test_agentic_saved_audits_have_two_cases_and_structured_stage_records():
+def test_agentic_saved_audits_have_three_cases_and_structured_stage_records():
     by_case = _audits_by_case()
     for case_id, audit in by_case.items():
         outputs = audit.get("model_outputs")
@@ -292,7 +310,7 @@ def test_agentic_saved_audits_have_two_cases_and_structured_stage_records():
 
 
 def test_answerable_cases_finish_sufficient_and_answered_with_essential_evidence():
-    """固定的两个 Agentic 案例必须真正走到可回答的最终状态。"""
+    """固定的三个 Agentic 案例必须真正走到可回答的最终状态。"""
 
     annotations = _query_annotations()
     assert set(annotations) == CASE_IDS
@@ -300,7 +318,7 @@ def test_answerable_cases_finish_sufficient_and_answered_with_essential_evidence
         annotation = annotations[case_id]
         assert annotation.get("answerability") == "answerable", (case_id, annotation)
 
-        final_verify = _stage_parsed(audit, "verify")
+        final_verify = _stage_effective(audit, "verify")
         assert isinstance(final_verify, dict), case_id
         assert final_verify.get("sufficient") is True, (case_id, final_verify)
         assert final_verify.get("missing") == [], (case_id, final_verify)
@@ -354,7 +372,7 @@ def test_verify_prompt_uses_actual_compact_canonical_evidence_payload():
         }
     }
     hits = [SimpleNamespace(page=7, text="full retrieved context", chunk_id="h1")]
-    requirements = [{"requirement_id": "action_1", "query": "q", "purpose": "p"}]
+    requirements = [{"requirement_id": "action_1", "query": "canonical", "purpose": "quote"}]
 
     def candidate_evidence_catalog(actual_hits: list) -> dict[str, dict]:
         catalog_calls.append(actual_hits)
@@ -373,17 +391,63 @@ def test_verify_prompt_uses_actual_compact_canonical_evidence_payload():
         "parse_agentic_verify": lambda raw, requirement_ids: json.loads(raw),
         "observed_payload": lambda actual_hits: [{"text": "full retrieved context"}],
         "json": json,
+        "re": re,
+        "unicodedata": __import__("unicodedata"),
     }
     exec(compile(ast.Module(body=[verify_node], type_ignores=[]), str(NOTEBOOK), "exec"), namespace)
     result = namespace["verify_once"]("question", hits, "initial", requirements)
 
     assert result["parsed"] == {"sufficient": True, "covered": ["action_1"], "missing": []}
+    assert result["effective"] == {"sufficient": True, "covered": ["action_1"], "missing": []}
     assert catalog_calls == [hits]
     assert len(prompt_calls) == 1
     prompt = prompt_calls[0]
     assert json.dumps(list(compact_catalog.values()), ensure_ascii=False) in prompt
     assert "字段只有 evidence_id、page、quote" in prompt
     assert "full retrieved context" in prompt
+
+
+def test_verify_adjudication_rejects_model_sufficient_without_lexical_support():
+    """模型的 sufficient 结果不能绕过基于实时 catalog 的确定性证据闸门。"""
+
+    tree = ast.parse(_code_text())
+    verify_node = next(
+        node
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name == "verify_once"
+    )
+    compact_catalog = {
+        "e_eigen": {
+            "evidence_id": "e_eigen",
+            "page": 44,
+            "quote": "广义特征值对应的特征向量",
+        }
+    }
+    hits = [SimpleNamespace(page=44, text="retrieved context", chunk_id="h1")]
+    requirements = [{
+        "requirement_id": "action_1",
+        "query": "同类异类样本的投影关系",
+        "purpose": "投影后同类接近异类远离",
+    }]
+
+    namespace = {
+        "candidate_evidence_catalog": lambda actual_hits: compact_catalog,
+        "call_glm_once": lambda prompt, *, max_tokens=900: json.dumps(
+            {"sufficient": True, "covered": ["action_1"], "missing": []},
+            ensure_ascii=False,
+        ),
+        "parse_agentic_verify": lambda raw, requirement_ids: json.loads(raw),
+        "observed_payload": lambda actual_hits: [],
+        "json": json,
+        "re": re,
+        "unicodedata": __import__("unicodedata"),
+    }
+    exec(compile(ast.Module(body=[verify_node], type_ignores=[]), str(NOTEBOOK), "exec"), namespace)
+    result = namespace["verify_once"]("question", hits, "initial", requirements)
+
+    assert result["parsed"] == {"sufficient": True, "covered": ["action_1"], "missing": []}
+    assert result["effective"] == {"sufficient": False, "covered": [], "missing": ["action_1"]}
+    assert result["adjudication"]["supported_requirement_ids"] == []
 
 
 def test_agentic_generation_does_not_leak_qrels_or_annotations():
@@ -459,7 +523,7 @@ def test_agentic_answer_parser_rejects_unsupported_status_and_fabricated_claims(
             json.dumps(
                 {
                     "status": "answered",
-                    "claims": [{"statement": "事实", "evidence_ids": ["e_fake"]}],
+                    "claims": [{"evidence_ids": ["e_fake"]}],
                 },
                 ensure_ascii=False,
             ),
@@ -473,7 +537,7 @@ def test_agentic_answer_parser_rejects_unsupported_status_and_fabricated_claims(
                     "status": "answered",
                     # The former singular evidence_id shape is intentionally
                     # rejected; the parser must not keep a compatibility path.
-                    "claims": [{"statement": "事实", "evidence_id": "e1"}],
+                    "claims": [{"evidence_id": "e1"}],
                 },
                 ensure_ascii=False,
             ),
@@ -485,7 +549,7 @@ def test_agentic_answer_parser_rejects_unsupported_status_and_fabricated_claims(
             json.dumps(
                 {
                     "status": "answered",
-                    "claims": [{"statement": "事实", "evidence_ids": ["e1", "e1"]}],
+                    "claims": [{"evidence_ids": ["e1", "e1"]}],
                 },
                 ensure_ascii=False,
             ),
@@ -496,7 +560,7 @@ def test_agentic_answer_parser_rejects_unsupported_status_and_fabricated_claims(
         json.dumps(
                 {
                     "status": "answered",
-                    "claims": [{"statement": "事实原文事实补充原文", "evidence_ids": ["e1", "e2"]}],
+                    "claims": [{"evidence_ids": ["e1", "e2"]}],
                 },
                 ensure_ascii=False,
             ),
@@ -531,88 +595,30 @@ def test_agentic_answer_parser_rejects_unsupported_status_and_fabricated_claims(
         )
 
 
-def test_agentic_claim_parser_rejects_semantic_reversals_not_just_low_overlap():
-    """反义改写即使共享大部分词，也必须因非 quote 拼接而拒绝。"""
+def test_agentic_claim_parser_rejects_model_written_statements():
+    """模型不能绕过 evidence ID 契约自行改写 statement。"""
 
     parse_agentic_answer = _extract_pure_function("parse_agentic_answer")
-    cases = [
-        (
-            "MDS 算法的降维准则是不要求原始空间中样本之间的距离在低维空间中得以保持。",
-            {"e_mds": {"evidence_id": "e_mds", "page": 133, "quote": "MDS 算法的降维准则是要求原始空间中样本之间的距离在低维空间中 得以保持"}},
-        ),
-        (
-            "即使xi已进行中心化，但zi仍然是中心化的，此时本节推导仍然成立。",
-            {"e_kpca": {"evidence_id": "e_kpca", "page": 132, "quote": "即使xi 已进行中心化, 但zi 却不一定是中心化的, 此时本节推导 均不再成立"}},
-        ),
-    ]
-    for statement, catalog in cases:
-        with pytest.raises((TypeError, ValueError), match="(?i)statement|支持|quote|answer"):
-            parse_agentic_answer(
-                json.dumps(
-                    {
-                        "status": "answered",
-                        "claims": [{"statement": statement, "evidence_ids": list(catalog)}],
-                    },
-                    ensure_ascii=False,
-                ),
-                catalog,
-                expected_sufficient=True,
-            )
+    catalog = {"e1": {"evidence_id": "e1", "page": 7, "quote": "原文事实"}}
+    with pytest.raises((TypeError, ValueError), match="(?i)statement|字段|evidence_ids"):
+        parse_agentic_answer(
+            json.dumps(
+                {
+                    "status": "answered",
+                    "claims": [{"statement": "反向改写", "evidence_ids": ["e1"]}],
+                },
+                ensure_ascii=False,
+            ),
+            catalog,
+            expected_sufficient=True,
+        )
 
 
-def test_agentic_claim_parser_preserves_numeric_operator_symbols():
-    """负号、小数点、斜杠和百分号变化不能被版式规范化吞掉。"""
+def test_agentic_claim_parser_hydrates_exact_quote_with_symbols():
+    """数值、运算符和标点由 canonical quote 确定性回填。"""
 
     parse_agentic_answer = _extract_pure_function("parse_agentic_answer")
-    counterexamples = [
-        (
-            "值为1",
-            {"e_negative": {"evidence_id": "e_negative", "page": 7, "quote": "值为-1"}},
-        ),
-        (
-            "误差为001",
-            {"e_decimal": {"evidence_id": "e_decimal", "page": 7, "quote": "误差为0.01"}},
-        ),
-        (
-            "比例为12",
-            {"e_fraction": {"evidence_id": "e_fraction", "page": 7, "quote": "比例为1/2"}},
-        ),
-        (
-            "准确率从10%下降到20%",
-            {"e_percent": {"evidence_id": "e_percent", "page": 7, "quote": "准确率从10%提高到20%"}},
-        ),
-        (
-            "x=1",
-            {"e_not_equal": {"evidence_id": "e_not_equal", "page": 7, "quote": "x!=1"}},
-        ),
-        (
-            "3",
-            {"e_factorial": {"evidence_id": "e_factorial", "page": 7, "quote": "3!"}},
-        ),
-        (
-            "xi",
-            {"e_subscript": {"evidence_id": "e_subscript", "page": 7, "quote": "x_i"}},
-        ),
-        (
-            "a*b+c",
-            {"e_parentheses": {"evidence_id": "e_parentheses", "page": 7, "quote": "a*(b+c)"}},
-        ),
-    ]
-    for statement, catalog in counterexamples:
-        with pytest.raises((TypeError, ValueError), match="(?i)statement|支持|quote|answer"):
-            parse_agentic_answer(
-                json.dumps(
-                    {
-                        "status": "answered",
-                        "claims": [{"statement": statement, "evidence_ids": list(catalog)}],
-                    },
-                    ensure_ascii=False,
-                ),
-                catalog,
-                expected_sufficient=True,
-            )
-
-    statement = "数值为-1，误差为0.01，比例为1/2，变化为10%"
+    statement = "数值为 -1，误差为 0.01，比例为 1/2，变化为 10%"
     catalog = {
         "e_symbols": {
             "evidence_id": "e_symbols",
@@ -624,7 +630,7 @@ def test_agentic_claim_parser_preserves_numeric_operator_symbols():
         json.dumps(
             {
                 "status": "answered",
-                "claims": [{"statement": statement, "evidence_ids": ["e_symbols"]}],
+                "claims": [{"evidence_ids": ["e_symbols"]}],
             },
             ensure_ascii=False,
         ),
@@ -632,6 +638,8 @@ def test_agentic_claim_parser_preserves_numeric_operator_symbols():
         expected_sufficient=True,
     )
     assert parsed["claims"][0]["evidence_ids"] == ["e_symbols"]
+    assert parsed["claims"][0]["statement"] == statement
+    assert parsed["answer"] == statement
 
 
 def test_agentic_runtime_uses_search_projection_without_loading_full_package(monkeypatch):
@@ -713,9 +721,23 @@ def test_simulated_unit_repair_reverify_pipeline_control_flow_with_mocks():
             "covered": [item["requirement_id"] for item in requirements] if sufficient else ["action_1"],
             "missing": [] if sufficient else ["action_2"],
         }
-        return {"step": "verify", "phase": phase, "raw": phase, "parsed": parsed, "pages": [hit.page for hit in hits]}
+        return {
+            "step": "verify",
+            "phase": phase,
+            "raw": phase,
+            "parsed": parsed,
+            "effective": parsed,
+            "adjudication": {"support_evidence_ids": {"action_1": ["e1"], "action_2": ["e1"]}},
+            "pages": [hit.page for hit in hits],
+        }
 
-    def parse_agentic_answer(raw: str, candidate_catalog: dict[str, dict], *, expected_sufficient: bool) -> dict:
+    def parse_agentic_answer(
+        raw: str,
+        candidate_catalog: dict[str, dict],
+        *,
+        expected_sufficient: bool,
+        requirement_ids: list[str] | None = None,
+    ) -> dict:
         events.append("answer:parse")
         return {
             "answer": "mock answer",
@@ -766,11 +788,11 @@ def test_simulated_unit_repair_reverify_pipeline_control_flow_with_mocks():
         "answer:parse",
     ]
     assert len(answer_prompts) == 1
-    assert 'ID=e1' in answer_prompts[0]
+    assert '"evidence_id": "e1"' in answer_prompts[0]
     assert "每条 claim" in answer_prompts[0]
-    assert "1..4 个 evidence_id" in answer_prompts[0]
-    assert "最终对象的键集合必须恰好是 {status, claims}" in answer_prompts[0]
-    assert "只输出 status 和 claims，不输出 answer" in answer_prompts[0]
+    assert "1..8 个候选 evidence_id" in answer_prompts[0]
+    assert "把每个 requirement_id 恰好覆盖一次" in answer_prompts[0]
+    assert "不输出 statement、answer 或解释" in answer_prompts[0]
     assert '"answer":' not in answer_prompts[0]
     assert "每条 claim 恰好只列一个 evidence_id" not in answer_prompts[0]
     assert "恰好只列一个 evidence_id" not in answer_prompts[0]
@@ -883,7 +905,7 @@ def test_mixed_pca_mds_catalog_keeps_both_topics_through_repair_merge():
     assert {"e_pca", "e_mds"} <= set(catalog)
 
 
-def test_hybrid_rrf_keeps_same_page_complementary_chunks_at_hit_grain():
+def test_hybrid_rank_blend_keeps_heterogeneous_units_separate():
     rank_fusion = _extract_pure_function("rank_fusion")
 
     def hit(page: int, text: str, chunk_id: str | None = None) -> SimpleNamespace:
@@ -895,6 +917,7 @@ def test_hybrid_rrf_keeps_same_page_complementary_chunks_at_hit_grain():
     fused = rank_fusion([dense_chunk, dense_other], [bm25_page], top_k=3)
     assert {item.chunk_id for item in fused} == {"dense_sparse", "dense_mds", None}
     assert any(item.text == bm25_page.text for item in fused)
+    assert len(fused) == 3  # chunk/page identities do not accumulate a shared RRF vote
 
 
 def test_saved_verify_records_have_disjoint_normalized_topics():
@@ -980,7 +1003,9 @@ def test_agentic_repair_merge_preserves_each_plan_action_and_essential_pages():
 
 
 def test_agentic_repair_is_followed_by_final_verify_before_any_answer():
-    audit = _audits_by_case()["agentic_mds_ksvd"]
+    """真实 LDA 案例必须走完首轮不足 → repair → after_repair verify。"""
+
+    audit = _audits_by_case()["lda_goal_and_eigenvector"]
     trace = _trace(audit)
     verify_indexes = [
         index
@@ -996,14 +1021,8 @@ def test_agentic_repair_is_followed_by_final_verify_before_any_answer():
         ANSWER_ALIASES & set(counts),
     )
     repair_indexes = [index for index, step in enumerate(trace) if step.get("step") == "repair"]
+    assert len(repair_indexes) == 1, "该 canonical 案例必须有一次真实 repair"
     assert int(counts.get("repair", 0)) == len(repair_indexes)
-    if not repair_indexes:
-        # A sufficient initial verify legitimately skips repair; the final
-        # verify-before-answer ordering is still required and is checked above.
-        assert int(counts.get("verify_initial", 0)) == 1
-        assert int(counts.get("verify_after_repair", 0)) == 0
-        assert int(counts.get("answer", 0)) == 1
-        return
     repair_index = repair_indexes[0]
     after_repair = [index for index in verify_indexes if index > repair_index]
     assert after_repair, "repair 后必须重新 verify，不能直接生成答案"
@@ -1017,6 +1036,13 @@ def test_agentic_repair_is_followed_by_final_verify_before_any_answer():
         )
     assert int(verify_count) >= 2
     assert int(counts.get("answer", 0)) == 1
+    initial = _stage_effective(audit, "verify_initial")
+    final = _stage_effective(audit, "verify_after_repair", "verify")
+    assert isinstance(initial, dict) and initial.get("sufficient") is False, initial
+    assert len(initial.get("covered", [])) == 1 and len(initial.get("missing", [])) == 1, initial
+    assert set(initial["covered"]) | set(initial["missing"]) == {"action_1", "action_2"}, initial
+    assert final and final.get("sufficient") is True and final.get("missing") == [], final
+    assert isinstance(audit["model_outputs"].get("repair", {}).get("raw"), str)
 
 
 def test_agentic_answer_claims_bind_to_final_evidence_ids_and_quotes():

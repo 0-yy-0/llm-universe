@@ -46,7 +46,7 @@ REQUIRED_EXPERIMENTS = (
     "6. 处理信息缺口/构建多轮多来源助手.ipynb",
 )
 AGENTIC_NOTEBOOK = Path("6. 处理信息缺口/让系统决定怎样检索.ipynb")
-AGENTIC_CASE_IDS = frozenset({"agentic_mds_ksvd", "agentic_kpca_centering"})
+AGENTIC_CASE_IDS = frozenset({"agentic_mds_ksvd", "agentic_kpca_centering", "lda_goal_and_eigenvector"})
 RESERVED_NOTEBOOKS = {
     "2. 数据处理/什么时候需要微调向量模型.ipynb",
     "3. 索引阶段/比较索引增强方法.ipynb",
