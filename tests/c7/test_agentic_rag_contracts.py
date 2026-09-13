@@ -96,6 +96,15 @@ def _audits_by_case() -> dict[str, dict]:
     return by_case
 
 
+def _saved_stdout() -> str:
+    return "".join(
+        "".join(output.get("text", []))
+        for cell in _notebook().get("cells", [])
+        for output in cell.get("outputs", [])
+        if isinstance(output, dict) and output.get("output_type") == "stream"
+    )
+
+
 def _query_annotations() -> dict[str, dict]:
     rows = [
         json.loads(line)
@@ -570,10 +579,10 @@ def test_agentic_answer_parser_rejects_unsupported_status_and_fabricated_claims(
         },
         expected_sufficient=True,
     )
-    assert parsed["answer"] == "事实原文事实补充原文"
+    assert parsed["answer"] == "事实原文\n\n事实补充原文"
     assert parsed["claims"] == [
         {
-            "statement": "事实原文事实补充原文",
+            "statement": "事实原文\n\n事实补充原文",
             "evidence_ids": ["e1", "e2"],
             "evidence": [
                 {"evidence_id": "e1", "page": 7, "quote": "事实原文"},
@@ -593,6 +602,44 @@ def test_agentic_answer_parser_rejects_unsupported_status_and_fabricated_claims(
             {"e1": {"evidence_id": "e1", "page": 7, "quote": "事实原文"}},
             expected_sufficient=True,
         )
+
+
+def test_agentic_answer_display_removes_contained_quote_without_losing_audit_rows():
+    parse_agentic_answer = _extract_pure_function("parse_agentic_answer")
+    catalog = {
+        "e_long": {
+            "evidence_id": "e_long",
+            "page": 41,
+            "quote": "线性判别分析希望同类样本尽可能接近，异类样本尽可能远离。",
+        },
+        "e_short": {
+            "evidence_id": "e_short",
+            "page": 41,
+            "quote": "同类样本尽可能接近",
+        },
+    }
+    parsed = parse_agentic_answer(
+        json.dumps(
+            {
+                "status": "answered",
+                "claims": [{"evidence_ids": ["e_long", "e_short"]}],
+            },
+            ensure_ascii=False,
+        ),
+        catalog,
+        expected_sufficient=True,
+    )
+
+    assert parsed["answer"] == catalog["e_long"]["quote"]
+    assert parsed["claims"][0]["evidence_ids"] == ["e_long", "e_short"]
+    assert len(parsed["claims"][0]["evidence"]) == 2
+
+
+def test_saved_stdout_shows_each_hydrated_readable_answer():
+    stdout = _saved_stdout()
+    for case_id, audit in _audits_by_case().items():
+        answer = audit["answer"]["answer"]
+        assert f"去重后的可读答案： {answer}" in stdout, case_id
 
 
 def test_agentic_claim_parser_rejects_model_written_statements():

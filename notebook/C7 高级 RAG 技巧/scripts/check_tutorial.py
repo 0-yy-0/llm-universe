@@ -808,9 +808,9 @@ def _check_agentic_contract(issues: list[str]) -> None:
                 for claim in claims
                 if isinstance(claim, dict) and isinstance(claim.get("statement"), str)
             ]
-            if len(statements) == len(claims) and answer_text != "".join(statements):
+            if len(statements) == len(claims) and answer_text != "\n\n".join(statements):
                 issues.append(
-                    f"Agentic {case_id} answer 必须严格等于按顺序拼接的 claim statements"
+                    f"Agentic {case_id} answer 必须严格等于按顺序用空行连接的 claim statements"
                 )
         if isinstance(final_verify_parsed, dict) and type(final_verify_parsed.get("sufficient")) is bool:
             expected_status = "answered" if final_verify_parsed["sufficient"] else "insufficient"
