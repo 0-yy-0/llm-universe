@@ -22,15 +22,13 @@
 3. **再检查检索系统。** 分别对 dense、BM25、混合检索和必要的重排做基线；确认索引使用的是最新完整 corpus，query/qrels 与评测集合一致。词面问题、过滤条件或索引错配，先修检索配置。
 4. **只有剩下稳定的语义排序缺口时才微调。** 先构造与实际检索任务一致的 query→evidence 数据，按 page/section/query family 分组切分，使用真实 evidence 作为 positive；配置只在 dev 上选择，选定后才在 frozen test 上比较 Recall@1/3/5/10、MRR 和逐题排名。
 
-## 本实验的数据和审核边界
+## 可选微调实验
 
-`data/dataset` 是本实验唯一事实源。最终数据包含 163 条南瓜书 query→evidence pair：101 train、28 dev、34 frozen test，分别来自 55、14、17 个互不重叠的 PDF 页面。
+`data/dataset` 是本实验唯一事实源。最终数据包含 163 条南瓜书 query→evidence pair：101 train、28 dev、34 frozen test，分别来自 55、14、17 个互不重叠的 PDF 页面。split 按 page、`section_id` 和 `query_family_id` 隔离，不共享 qrel evidence；训练 positive 始终是 canonical `evidence.quote`。
 
-100 个候选来源页先按 BGE tokenizer 确定性切成 287 个、最多 384 tokens 的原文 chunk。生成、审核、训练和评估使用完全相同的 chunk，不按 query 或答案临时裁剪；每个 chunk 最多生成 1 道原文足以支持的问法，不强制每页凑齐四种类型。3 个生成结果连续未通过长度/schema 校验而被显式拒绝，2 个规范化重复问法被去重，余下 282 个候选中 `glm-4-flash` 初审拒绝 9 个；随后由同一 `glm-4-flash` 发起另一次独立语义审核请求，剔除 110 个存在数学转写错误、对象错配、条件缺失、证据截断、问题不自足或循环回答等明确问题的候选，最终保留 163 条，覆盖其中 86 个来源页。二次剔除及逐条理由保存在 `data/semantic_review_exclusions.json`。全部保留记录明确 `human_verified=false`，不把模型审核写成人工标注。另有 5 个含解析替换符的 fixed chunk 只留在检索 corpus 中，既无 qrel 也不作为训练 positive，只能视为未标注的真实解析噪声，不能视为已确认负例。
+100 个候选来源页被确定性切成 287 个原文 chunk，生成、审核、训练和评估共用这些 chunk。问法由 `glm-4-flash` 生成、初审，再由同一模型的另一次独立请求做语义复核；保留记录全部为 `human_verified=false`，不能写成人工标注。被剔除候选及逐条理由见 `data/semantic_review_exclusions.json`；完整字段、去重、解析噪声和数据检查规则见[数据说明](../data/README.md)与[维护说明](../docs/维护说明.md)。
 
-split 按 page、`section_id` 和 `query_family_id` 隔离，不共享 qrel evidence。候选 answer 仅用于审核，训练 positive 始终是 canonical `evidence.quote`；训练、开发和测试采用同一任务定义，但来源页面不同。
-
-## 运行实验
+### 运行实验
 
 先按[教程首页的运行准备](../README.md#运行准备)使用 Python 3.10 与 `llm-universe-c7` kernel，进入 C7 根目录并安装 `requirements-c7.txt`。第一次运行前，在同一环境、网络可用时下载固定模型一次：
 
@@ -40,15 +38,15 @@ python -c "from sentence_transformers import SentenceTransformer; SentenceTransf
 
 这条命令只负责准备本地 Hugging Face 缓存；完成后 Notebook 和脚本都用 `local_files_only=True` 运行，缓存、依赖或数据缺失会直接失败，不切换模型、不使用 fallback。不要把联网下载放进评测闭环。
 
-训练采用 `MultipleNegativesRankingLoss`（MNRL）：一个 batch 中第 `i` 个 query 的第 `i` 个真实 evidence 是正例，其他 evidence 是批内负例。分组 sampler 同时检查 positive ID 和完整 qrels，共享任一已知正例的 query 不会进入同一 batch，避免把相关 evidence 当成负例。当前 163 条 query→evidence 数据只支撑这次 MNRL 实验；Notebook 保留 MegaBatchMarginLoss、ContrastiveLoss、CosineSimilarityLoss、SoftmaxLoss、TripletLoss 和四种 Batch Triplet 损失的原理与选择条件，但不伪造这些损失在当前数据上的比较结果。
+训练采用 `MultipleNegativesRankingLoss`（MNRL），并用分组 sampler 避免把共享已知正例的 query 放入同一 batch。当前数据只支撑这次 MNRL 实验；Notebook 仍完整介绍 MegaBatchMarginLoss、ContrastiveLoss、CosineSimilarityLoss、SoftmaxLoss、TripletLoss 和四种 Batch Triplet 损失的原理与选择条件，但不伪造它们在当前数据上的比较结果。
 
-运行 [什么时候需要微调向量模型](什么时候需要微调向量模型.ipynb) 可重现完整实验：使用 `BAAI/bge-small-zh-v1.5`，在 dev 上选择训练配置，保存并重载选中模型，然后一次性评估 frozen test，并重新编码 287 个 canonical `fixed_token_chunk`，输出 Recall@1/3/5/10、MRR 与逐题变化。脚本入口是：
+运行[什么时候需要微调向量模型](什么时候需要微调向量模型.ipynb)可重现完整闭环：使用 `BAAI/bge-small-zh-v1.5`，在 dev 上选择配置，保存并重载模型，重新编码 287 个 canonical chunk，最后一次性评估 frozen test。脚本入口是：
 
 ```bash
 python scripts/run_embedding_finetune.py
 ```
 
-上面的脚本也从 C7 根目录运行。Notebook 和脚本都只读取统一数据包，缺少依赖、缓存模型或数据时直接报错；章节目录下没有另一份 `requirements-c7.txt`。
+脚本也从 C7 根目录运行。Notebook 和脚本只读取统一数据包；缺少依赖、缓存或数据时直接报错，不切换模型或使用 fallback。
 
 ### 目录中的示意图
 

@@ -76,14 +76,14 @@
           "source_id": "data_processing_readme",
           "source_type": "C7 data-processing guide",
           "purpose": "training data construction, MNRL choice and frozen-test protocol",
-      "sha256": "424bbb7dbf3f9963bedf457542c4334bede4ecb67da359f776ee94d26bc5a905"
+      "sha256": "978ce5e8a04fc0498702d1784956ba14f8e403a6762acb2de1c05896699f6b64"
         },
         {
           "path": "7. 评估/README.md",
           "source_id": "evaluation_readme",
           "source_type": "C7 evaluation guide",
           "purpose": "method-fit, regression guard and end-to-end evaluation scope",
-      "sha256": "a4b44e57e621c8825f8bd14edd1ebdc80aa4f4b25de2837fce72a22f9fca1fab"
+      "sha256": "b6ab9f41cb9f00eab39300098bab9c67f2b28aee96afa48beeeb0943b4edf963"
         }
       ]
     },
