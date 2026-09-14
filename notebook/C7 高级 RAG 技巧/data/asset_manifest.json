@@ -76,7 +76,7 @@
           "source_id": "data_processing_readme",
           "source_type": "C7 data-processing guide",
           "purpose": "training data construction, MNRL choice and frozen-test protocol",
-      "sha256": "978ce5e8a04fc0498702d1784956ba14f8e403a6762acb2de1c05896699f6b64"
+      "sha256": "5ec4079a3f1439c2a328a0a3f958668ecc3fcea2088f7feff14353c1a33b4528"
         },
         {
           "path": "7. 评估/README.md",

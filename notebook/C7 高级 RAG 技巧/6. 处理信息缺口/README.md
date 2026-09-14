@@ -8,7 +8,8 @@
 |---|---|---|
 | 索引时 | 短片段向量丢失长文语境 | [Late Chunking：长文先整体编码再分块](长文先整体编码再分块.ipynb) |
 | 检索前 | 一个问题包含多个独立目标 | [按固定步骤拆分复杂问题](按固定步骤拆分复杂问题.ipynb)、[让模型自动拆成子问题](让模型自动拆成子问题.ipynb) |
-| 检索后 | 命中片段缺上下文，或首轮证据不完整 | [句子/父子片段](按句子和父子片段补充上下文.ipynb)、[相邻页面](找到相关页面后补上相邻内容.ipynb)、[有界补查](一次没找全时如何补查.ipynb)、[CRAG/Self-RAG](检查检索结果后再继续.ipynb)、[Agentic RAG](让系统决定怎样检索.ipynb) |
+| 检索后 | 命中片段缺上下文，或首轮证据不完整 | [句子/父子片段](按句子和父子片段补充上下文.ipynb)、[相邻页面](找到相关页面后补上相邻内容.ipynb)、[有界补查](一次没找全时如何补查.ipynb)、[CRAG/Self-RAG](检查检索结果后再继续.ipynb) |
+| 跨阶段编排 | 需要先规划工具，再观察证据并决定补查或停止 | [Agentic RAG](让系统决定怎样检索.ipynb) |
 | 会话与来源 | 追问省略对象、范围不清、需要跨来源或关系多跳 | [补全追问](补全追问信息.ipynb)、[资料路由与 GraphRAG](让系统选择资料来源.ipynb)、[多轮多来源助手](构建多轮多来源助手.ipynb) |
 
 单次 query rewrite 和 MultiQuery 仍然回答同一个目标；decomposition 才把多个独立目标拆开。三者的具体边界见 C7 第 4 章的[改写检索问题](../4.%20检索阶段/改写检索问题.ipynb)。
@@ -30,9 +31,21 @@
 2. [找到相关页面后补上相邻内容](找到相关页面后补上相邻内容.ipynb)：定位连续推导中的一页后，再补回前后页。
 3. [一次没找全时如何补查](一次没找全时如何补查.ipynb)：根据首轮结果中明确缺少的内容只补查必要部分。
 4. [检查检索结果后再继续](检查检索结果后再继续.ipynb)：用 CRAG 和 Self-RAG 判断证据是否足够，以及是否需要修正检索。
-5. [Agentic RAG：用 Agent 编排多步检索](让系统决定怎样检索.ipynb)：实现受约束的 `Plan → Act → Observe → Reflect/Repair → Answer` 闭环，在关键词、向量和混合检索之间选择，并保存逐步 trace。
+Self-RAG 的结构化模型输出必须通过字段、类型、数量和 evidence 绑定检查；非法响应直接失败，不使用重试、备用模型或默认答案。
 
-Agentic RAG 与 Self-RAG 的结构化模型输出必须通过字段、类型、数量和 evidence 绑定检查；非法响应直接失败，不使用重试、备用模型或默认答案。CRAG 使用本地 `BAAI/bge-reranker-base`，准备命令和每种方法的完整运行契约见对应 Notebook；维护检查见[维护说明](../docs/维护说明.md)。
+### CRAG 模型准备
+
+CRAG 只读取本地 `BAAI/bge-reranker-base` snapshot。第一次运行前，在 C7 根目录联网准备一次缓存：
+
+```bash
+python -c "from modelscope import snapshot_download; print(snapshot_download('BAAI/bge-reranker-base'))"
+```
+
+Notebook 随后使用 `local_files_only=True`；缓存缺失时直接失败，不联网下载、不切换模型。其他字段和运行契约见[检查检索结果后再继续](检查检索结果后再继续.ipynb)，维护检查见[维护说明](../docs/维护说明.md)。
+
+## 跨阶段：Agentic RAG 编排
+
+[Agentic RAG：用 Agent 编排多步检索](让系统决定怎样检索.ipynb)实现受约束的 `Plan → Act → Observe → Reflect/Repair → Answer` 闭环。它先规划关键词、向量或混合检索工具，再执行检索、观察证据并决定补查或停止，因此横跨检索前、检索中和检索后，而不是单一的“检索后动作”。逐步 trace、最终核验和 evidence 绑定均保存在 Notebook；结构非法时直接失败，不使用重试、备用模型或默认答案。
 
 ## 对话与资料范围
 
